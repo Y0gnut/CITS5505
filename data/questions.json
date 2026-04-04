@@ -1,0 +1,122 @@
+[
+  {
+    "id": 1,
+    "topic": "HTML",
+    "question": "Why is using semantic elements like <main>, <article>, and <nav> generally better than using only <div> tags?",
+    "options": [
+      "Semantic tags always load faster in every browser",
+      "Semantic tags improve meaning, accessibility, and maintainability",
+      "Semantic tags automatically apply Bootstrap styles",
+      "Semantic tags remove the need for CSS classes"
+    ],
+    "answer": 1
+  },
+  {
+    "id": 2,
+    "topic": "HTML",
+    "question": "Which statement about the alt attribute on <img> is most accurate?",
+    "options": [
+      "It is only useful for search engines",
+      "It should repeat the file name of the image",
+      "It provides text alternatives when images cannot be seen",
+      "It is required only when width and height are missing"
+    ],
+    "answer": 2
+  },
+  {
+    "id": 3,
+    "topic": "CSS",
+    "question": "Given .menu li a { color: gold; }, which part of the selector directly targets the clickable element?",
+    "options": [
+      ".menu",
+      "li",
+      "a",
+      "color"
+    ],
+    "answer": 2
+  },
+  {
+    "id": 4,
+    "topic": "CSS",
+    "question": "With box-sizing: border-box; applied, what does width: 300px represent?",
+    "options": [
+      "Only content width, excluding padding and border",
+      "Content plus padding and border combined",
+      "Content plus margin but not padding",
+      "Only border thickness"
+    ],
+    "answer": 1
+  },
+  {
+    "id": 5,
+    "topic": "CSS",
+    "question": "When should you prefer CSS Grid over Flexbox?",
+    "options": [
+      "When aligning items in a single row or column only",
+      "When you need two-dimensional layout control across rows and columns",
+      "When you want to avoid media queries entirely",
+      "When styling text color in navigation links"
+    ],
+    "answer": 1
+  },
+  {
+    "id": 6,
+    "topic": "JavaScript",
+    "question": "What is the main benefit of adding an event listener instead of inline onclick attributes in HTML?",
+    "options": [
+      "It guarantees better performance in all cases",
+      "It separates structure from behavior and improves maintainability",
+      "It prevents users from opening developer tools",
+      "It automatically validates form fields"
+    ],
+    "answer": 1
+  },
+  {
+    "id": 7,
+    "topic": "JavaScript",
+    "question": "What does document.querySelector('#result') return if no matching element exists?",
+    "options": [
+      "An empty object",
+      "false",
+      "undefined",
+      "null"
+    ],
+    "answer": 3
+  },
+  {
+    "id": 8,
+    "topic": "JavaScript",
+    "question": "Why is async/await often preferred over deeply nested callbacks for asynchronous code?",
+    "options": [
+      "It makes code easier to read and handle errors with try/catch",
+      "It forces all asynchronous operations to run in parallel",
+      "It removes the need for network error handling",
+      "It converts asynchronous functions into synchronous ones"
+    ],
+    "answer": 0
+  },
+  {
+    "id": 9,
+    "topic": "HTML",
+    "question": "Which heading structure is best practice for page semantics?",
+    "options": [
+      "Use many <h1> tags for visual emphasis only",
+      "Start at <h3> if the text looks better",
+      "Use headings in logical order to reflect content hierarchy",
+      "Avoid headings and use bold paragraphs instead"
+    ],
+    "answer": 2
+  },
+  {
+    "id": 10,
+    "topic": "CSS",
+    "question": "Why is a mobile-first approach considered a responsive best practice?",
+    "options": [
+      "Because desktop users do not need responsive design",
+      "Because starting with small screens encourages simpler, scalable layouts",
+      "Because media queries are not needed afterwards",
+      "Because pixel units become invalid on mobile devices"
+    ],
+    "answer": 1
+  }
+]

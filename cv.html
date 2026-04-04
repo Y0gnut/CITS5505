@@ -1,0 +1,415 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Document metadata and external dependencies -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CITS5505 CV</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+    <style>
+      /* CV page visual enhancements and layout customizations */
+      .cv-hero {
+        background:
+          radial-gradient(circle at 5% 10%, rgba(210, 169, 79, 0.18), transparent 32%),
+          linear-gradient(155deg, rgba(18, 37, 65, 0.96), rgba(10, 24, 42, 0.96));
+      }
+
+      .avatar-circle {
+        width: 130px;
+        height: 130px;
+        border-radius: 50%;
+        display: grid;
+        place-items: center;
+        font-size: 2.4rem;
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        color: #0d1b30;
+        background: radial-gradient(circle at 30% 30%, #f7d892, #d2a94f);
+        border: 3px solid rgba(255, 255, 255, 0.2);
+        box-shadow: 0 12px 26px rgba(0, 0, 0, 0.3);
+      }
+
+      .typing-cursor::after {
+        content: "|";
+        margin-left: 4px;
+        opacity: 1;
+        animation: cursor-blink 0.9s steps(1, end) infinite;
+      }
+
+      @keyframes cursor-blink {
+        50% {
+          opacity: 0;
+        }
+      }
+
+      .cv-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+
+      @media (min-width: 992px) {
+        .cv-grid {
+          grid-template-columns: 1.05fr 0.95fr;
+          align-items: start;
+        }
+      }
+
+      .quote-box {
+        border-left: 4px solid #d2a94f;
+        background: rgba(9, 21, 39, 0.85);
+      }
+
+      .skill-item .progress {
+        height: 0.95rem;
+      }
+
+      .skill-value {
+        width: 0;
+        transition: width 1.2s cubic-bezier(0.25, 1, 0.5, 1);
+      }
+
+      .role-meta {
+        color: #f0c76a;
+        font-weight: 600;
+      }
+
+      /* Print rules removed — CV is now downloaded as a PDF file */
+    </style>
+  </head>
+  <body class="cv-page">
+    <!-- Page transition overlay: fades to opaque on exit, invisible on arrival -->
+    <div id="page-transition-overlay"></div>
+
+    <!-- Shared site header and navigation -->
+    <header>
+      <nav class="navbar navbar-expand-lg navbar-dark app-navbar sticky-top" aria-label="Main navigation">
+        <div class="container">
+          <a class="navbar-brand" href="index.html">CITS5505 Web App</a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#mainNav"
+            aria-controls="mainNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="mainNav">
+            <ul class="navbar-nav ms-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="index.html">Tutorial</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="quiz.html">Quiz</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="reflection.html">AI Reflection Log</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="cv.html">CV</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Main CV content -->
+    <main class="py-5 page-content">
+      <section class="container">
+        <article class="info-card cv-hero p-4 p-md-5 mb-4">
+          <div class="d-flex flex-column flex-lg-row align-items-lg-center justify-content-between gap-4">
+            <div class="d-flex align-items-center gap-4">
+              <img src="assets/images/icon.png" alt="Kunyu He"
+                   style="width:120px; height:120px; object-fit:cover; border-radius:50%; border: 3px solid #e6a817;">
+              <div>
+                <p class="section-kicker mb-2">Curriculum Vitae</p>
+                <h1 class="display-6 mb-1 typing-cursor" id="cv-typing-name" data-text="Kunyu He"></h1>
+                <p class="mb-1" id="cv-typing-title" data-text="AI Engineer · Master of IT (AI), The University of Western Australia"></p>
+                <p class="mb-0">Phone: 0411 493 946 | Email: kunyuhe2002@gmail.com</p>
+                <p class="mb-0"><a href="https://www.linkedin.com/in/kunyu-he-78491a32a" target="_blank" rel="noopener noreferrer" class="text-warning">linkedin.com/in/kunyu-he-78491a32a</a></p>
+              </div>
+            </div>
+            <div class="text-lg-end">
+              <a href="assets/images/Kunyu_He.pdf" download="Kunyu_He_CV.pdf" class="btn btn-accent btn-lg" id="download-cv-btn">Download CV</a>
+            </div>
+          </div>
+        </article>
+
+        <section class="info-card p-4 p-md-5 mb-4" aria-labelledby="biography-heading">
+          <h2 id="biography-heading" class="h3 mb-3">Professional Biography</h2>
+          <p>
+            My name is Kunyu He, and I am an end-to-end AI Engineer currently completing a Master of Information Technology
+            with a specialisation in Artificial Intelligence at The University of Western Australia. My journey in computing
+            began at the University of Science and Technology Beijing, where I studied Artificial Intelligence and developed
+            a strong grounding in machine learning, deep learning, and natural language processing. I graduated in June 2024
+            with a Bachelor of Engineering and a GPA of 3.5 out of 4.0, recognised along the way with the First Prize in the
+            USTB Mathematical Competition and the Third Prize in the People's Scholarship — reflections of the analytical
+            rigour I carry into every technical challenge.
+          </p>
+          <p>
+            A defining project during my undergraduate studies was a Natural Language Inference system for scientific texts.
+            Working with over 26,000 text pairs, I engineered an end-to-end NLP pipeline implementing BiLSTM, ESIM, and
+            Transformer architectures, then conducted systematic ablation studies on feature fusion strategies. This work
+            lifted baseline accuracy from 66.27% to 74.08% — an experience that cemented my belief that disciplined
+            experimentation, not intuition alone, is what moves the needle in applied AI.
+          </p>
+          <p>
+            My professional experience progressed from embedded and data roles into enterprise AI. At Baike Rongchuang in
+            mid-2023, I programmed STM32 microcontrollers in C/C++ to support an automated cargo classification system and
+            deployed an OCR model onto embedded hardware — my first experience closing the loop between a trained model and
+            real-world deployment constraints. At Cummins (China) in late 2023, I built Regex-based rule libraries for
+            automated PII data tagging and designed Power BI dashboards integrating Tenable cloud data, providing
+            cross-departmental stakeholders with data-driven insight for security remediation.
+          </p>
+          <p>
+            My most substantive role to date is as a Consulting Intern at IBM (China), where since November 2025 I have been
+            architecting enterprise-grade AI Agents and RAG pipelines. I spearheaded the full-lifecycle development of AI
+            Agents using Volcengine Data Agent and HiAgent workflows, integrated the Model Context Protocol (MCP) to connect
+            large language models with custom enterprise databases, and enabled hallucination-free financial insights through
+            natural-language anomaly analysis. I also developed and deployed a hybrid supply chain AI system combining
+            time-series and regression models — Croston, TSB, Random Forest, XGBoost — with LLM reasoning, and architected
+            the full MCP-integrated deployment on Volcengine cloud for continuous automated decision support.
+          </p>
+          <p>
+            At UWA, my Master of IT studies in AI are deepening my capabilities in deep learning, NLP, and data science,
+            while giving me the opportunity to build this four-page interactive web project for CITS5505 — a practical
+            exercise in front-end engineering, AJAX-driven quiz logic, API integration, and accessible responsive design.
+            Looking ahead, I am focused on architecting production-grade agentic AI systems that bridge research and
+            enterprise impact. I welcome opportunities to contribute deep ML engineering, cloud deployment experience, and a
+            bias for independent execution to a team solving high-value real-world problems.
+          </p>
+        </section>
+
+        <div class="cv-grid">
+          <div class="vstack gap-4">
+            <article class="info-card p-4" aria-labelledby="statement-heading">
+              <h2 id="statement-heading" class="h4 mb-3">Personal Statement</h2>
+              <p class="mb-0">
+                I am an end-to-end AI Engineer with enterprise experience at IBM and Cummins, specialising in architecting
+                automated AI Agents (RAG, MCP) and cloud-based predictive models. I seek technically demanding environments
+                where AI is engineered with precision, deployed at scale, and measured against real business outcomes.
+              </p>
+            </article>
+
+            <article class="info-card p-4" aria-labelledby="education-heading">
+              <h2 id="education-heading" class="h4 mb-3">Education</h2>
+              <ul class="mb-0">
+                <li class="mb-3">
+                  <strong>The University of Western Australia</strong><br />
+                  Master of Information Technology (Artificial Intelligence)<br />
+                  <span class="role-meta">Feb 2025 – Present</span><br />
+                  Focus: Deep Learning, Natural Language Processing, Data Science
+                </li>
+                <li>
+                  <strong>University of Science and Technology Beijing</strong><br />
+                  Bachelor of Engineering (Artificial Intelligence) — GPA 3.5 / 4.0<br />
+                  <span class="role-meta">Sep 2020 – Jun 2024</span><br />
+                  Awards: First Prize, USTB Mathematical Competition; Third Prize, USTB People's Scholarship
+                </li>
+              </ul>
+            </article>
+
+            <article class="info-card p-4" aria-labelledby="experience-heading">
+              <h2 id="experience-heading" class="h4 mb-3">Work Experience</h2>
+              <section class="mb-4">
+                <p class="mb-1 role-meta">IBM (China) Investment Co., Ltd. — Consulting Intern | Nov 2025 – Present</p>
+                <ul class="mb-0">
+                  <li>Spearheaded full-lifecycle development of enterprise-grade AI Agents using Volcengine Data Agent and HiAgent
+                      workflows; engineered a robust RAG pipeline and integrated MCP to connect LLMs with custom enterprise databases,
+                      enabling hallucination-free financial insights and natural-language anomaly analysis.</li>
+                  <li>Involved in IPD and production-sales balance initiatives; engineered AI assistants via Google AI Studio
+                      targeting procurement comparison, demand forecasting, and smart scheduling.</li>
+                  <li>Pioneered a hybrid “large + small model” AI architecture for supply chain scenarios, developing and deploying
+                      time-series and regression models (Croston, TSB, Random Forest, XGBoost) fused with LLM reasoning.</li>
+                  <li>Architected and maintained MCP-integrated deployment on Volcengine cloud for stable, continuous automated
+                      decision support.</li>
+                </ul>
+              </section>
+              <section class="mb-4">
+                <p class="mb-1 role-meta">Cummins (China) Investment Co., Ltd. — Data Analysis Intern | Oct 2023 – Dec 2023</p>
+                <ul class="mb-0">
+                  <li>Developed and optimised Regex rule libraries for automated PII data tagging, enhancing data processing coverage.</li>
+                  <li>Designed Power BI dashboards integrating Tenable cloud data, providing data-driven visual decision support
+                      for cross-departmental security remediation.</li>
+                </ul>
+              </section>
+              <section>
+                <p class="mb-1 role-meta">Baike Rongchuang (Beijing) Technology — Embedded AI Intern | Jun 2023 – Jul 2023</p>
+                <ul class="mb-0">
+                  <li>Programmed STM32 microcontrollers (C/C++) to support hardware-software integration of an automated
+                      cargo classification system.</li>
+                  <li>Deployed an OCR model onto embedded hardware, optimising code for stable system performance.</li>
+                </ul>
+              </section>
+            </article>
+          </div>
+
+          <div class="vstack gap-4">
+            <article class="info-card p-4" aria-labelledby="skills-heading">
+              <h2 id="skills-heading" class="h4 mb-3">Technical Skills</h2>
+              <p class="small text-light-subtle">Bars animate when this section enters view.</p>
+
+              <h3 class="h6 mb-2 mt-3">Programming &amp; Data Engineering</h3>
+              <div class="skill-item mb-3">
+                <label class="form-label d-flex justify-content-between"><span>Python</span><span>92%</span></label>
+                <div class="progress skill-progress">
+                  <div class="progress-bar skill-value" role="progressbar" data-skill-value="92" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+              </div>
+              <div class="skill-item mb-3">
+                <label class="form-label d-flex justify-content-between"><span>PyTorch</span><span>80%</span></label>
+                <div class="progress skill-progress">
+                  <div class="progress-bar skill-value" role="progressbar" data-skill-value="80" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+              </div>
+              <div class="skill-item mb-3">
+                <label class="form-label d-flex justify-content-between"><span>SQL &amp; ETL Pipelines</span><span>85%</span></label>
+                <div class="progress skill-progress">
+                  <div class="progress-bar skill-value" role="progressbar" data-skill-value="85" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+              </div>
+
+              <h3 class="h6 mb-2 mt-3">AI, LLMs &amp; Agentic Systems</h3>
+              <div class="skill-item mb-3">
+                <label class="form-label d-flex justify-content-between"><span>RAG &amp; Agent Workflows</span><span>88%</span></label>
+                <div class="progress skill-progress">
+                  <div class="progress-bar skill-value" role="progressbar" data-skill-value="88" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+              </div>
+              <div class="skill-item mb-3">
+                <label class="form-label d-flex justify-content-between"><span>LangGraph / LangChain</span><span>80%</span></label>
+                <div class="progress skill-progress">
+                  <div class="progress-bar skill-value" role="progressbar" data-skill-value="80" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+              </div>
+              <div class="skill-item mb-3">
+                <label class="form-label d-flex justify-content-between"><span>LLM Fine-tuning &amp; Google AI Studio</span><span>78%</span></label>
+                <div class="progress skill-progress">
+                  <div class="progress-bar skill-value" role="progressbar" data-skill-value="78" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+              </div>
+
+              <h3 class="h6 mb-2 mt-3">Cloud, MLOps &amp; Deployment</h3>
+              <div class="skill-item mb-3">
+                <label class="form-label d-flex justify-content-between"><span>Docker &amp; AWS</span><span>78%</span></label>
+                <div class="progress skill-progress">
+                  <div class="progress-bar skill-value" role="progressbar" data-skill-value="78" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+              </div>
+              <div class="skill-item mb-3">
+                <label class="form-label d-flex justify-content-between"><span>Model Deployment (Volcengine)</span><span>85%</span></label>
+                <div class="progress skill-progress">
+                  <div class="progress-bar skill-value" role="progressbar" data-skill-value="85" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+              </div>
+              <div class="skill-item">
+                <label class="form-label d-flex justify-content-between"><span>Serverless &amp; MLOps (veFaaS, Coze)</span><span>75%</span></label>
+                <div class="progress skill-progress">
+                  <div class="progress-bar skill-value" role="progressbar" data-skill-value="75" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+              </div>
+            </article>
+
+            <article class="info-card p-4" aria-labelledby="projects-heading">
+              <h2 id="projects-heading" class="h4 mb-3">Projects</h2>
+              <section class="mb-3">
+                <p class="mb-1 role-meta">Scientific Text Natural Language Inference System | 2024</p>
+                <ul class="mb-0">
+                  <li>Engineered an NLP pipeline for 26,000+ scientific text pairs; implemented BiLSTM, ESIM, and Transformer
+                      architectures.</li>
+                  <li>Conducted systematic ablation studies on feature fusion, boosting baseline accuracy from 66.27% to 74.08%.</li>
+                </ul>
+              </section>
+              <section>
+                <p class="mb-1 role-meta">CITS5505 Interactive Web Application | 2026</p>
+                <ul class="mb-0">
+                  <li>Designed and built a four-page interactive web app covering tutorial, AJAX quiz with localStorage,
+                      AI reflection log, and CV page.</li>
+                  <li>Implemented Fisher-Yates randomisation, beforeunload safety, public API reward, and responsive CSS
+                      with a custom visual identity.</li>
+                </ul>
+              </section>
+            </article>
+
+            <article class="info-card p-4" aria-labelledby="languages-heading">
+              <h2 id="languages-heading" class="h4 mb-3">Languages</h2>
+              <div class="skill-item mb-3">
+                <label class="form-label d-flex justify-content-between"><span>English</span><span>Fluent</span></label>
+                <div class="progress skill-progress">
+                  <div class="progress-bar skill-value" role="progressbar" data-skill-value="75" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+              </div>
+              <div class="skill-item">
+                <label class="form-label d-flex justify-content-between"><span>Chinese (Mandarin)</span><span>Native</span></label>
+                <div class="progress skill-progress">
+                  <div class="progress-bar skill-value" role="progressbar" data-skill-value="100" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+              </div>
+            </article>
+
+            <article class="info-card quote-box p-4" aria-labelledby="quote-heading">
+              <h2 id="quote-heading" class="h5 mb-2">Motivational Quote</h2>
+              <blockquote class="mb-1" id="motivation-quote">Loading quote...</blockquote>
+              <p class="mb-0 small text-light-subtle" id="motivation-author"></p>
+            </article>
+          </div>
+        </div>
+
+        <article class="info-card p-4 p-md-5 mt-4" aria-labelledby="references-heading">
+          <h2 id="references-heading" class="h4 mb-3">References</h2>
+          <p class="mb-3"><strong>Professional References:</strong> Available upon request.</p>
+          <h3 class="h5 mb-2">Sources (UWA style)</h3>
+          <ul class="mb-0">
+            <li>Bootstrap Team 2026, <em>Bootstrap Documentation</em>, viewed 30 March 2026, &lt;https://getbootstrap.com/docs/5.3/&gt;.</li>
+            <li>OpenJS Foundation 2026, <em>jQuery API Documentation</em>, viewed 30 March 2026, &lt;https://api.jquery.com/&gt;.</li>
+            <li>Mozilla Foundation 2026, <em>MDN Web Docs: Window: beforeunload event</em>, viewed 30 March 2026, &lt;https://developer.mozilla.org/en-US/docs/Web/API/Window/beforeunload_event&gt;.</li>
+            <li>Mozilla Foundation 2026, <em>MDN Web Docs: Window.localStorage</em>, viewed 30 March 2026, &lt;https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage&gt;.</li>
+            <li>Mozilla Foundation 2026, <em>MDN Web Docs: Fetch API</em>, viewed 30 March 2026, &lt;https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API&gt;.</li>
+            <li>Advice Slip 2026, <em>Advice Slip JSON API</em>, viewed 30 March 2026, &lt;https://api.adviceslip.com/&gt;.</li>
+            <li>PrismJS Contributors 2026, <em>Prism.js Documentation</em>, viewed 30 March 2026, &lt;https://prismjs.com/&gt;.</li>
+            <li>GitHub &amp; Anthropic 2026, <em>GitHub Copilot and Claude (Anthropic) \u2014 AI Coding Assistants</em>, viewed 30 March 2026. GitHub Copilot and Claude (Anthropic) were used as coding assistants during development. All AI-generated content was reviewed, verified, and modified by the author.</li>
+          </ul>
+        </article>
+      </section>
+    </main>
+
+    <!-- Shared site footer -->
+    <footer class="app-footer py-4 mt-5">
+      <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center gap-2">
+        <p class="mb-0">CITS5505 Multi-Page Application</p>
+        <p class="mb-0">Copyright <span class="current-year"></span> Student Project</p>
+      </div>
+    </footer>
+
+    <!-- JavaScript dependencies and page script -->
+    <script
+      src="https://code.jquery.com/jquery-3.7.1.min.js"
+      integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+      crossorigin="anonymous"
+    ></script>
+    <script src="js/cv.js"></script>
+    <!-- Page transition logic: intercepts internal links, plays exit/entrance animation -->
+    <script src="js/transitions.js"></script>
+  </body>
+</html>

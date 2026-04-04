@@ -1,0 +1,951 @@
+/* ====================================================================
+   CITS5505 — Global Stylesheet
+   Shared across Tutorial (index.html), Quiz (quiz.html),
+   Reflection (reflection.html), and CV (cv.html).
+   ==================================================================== */
+
+
+/* ── SECTION 1: FONT USAGE NOTE ─────────────────────────────────────
+   Inter (base UI font) and Fira Code (monospace, code elements) are
+   loaded via <link> tags in each HTML file's <head>. Using <link> is
+   preferred over @import because it does not block rendering.
+   Referenced below as: font-family: "Inter" and font-family: "Fira Code".
+   ------------------------------------------------------------------- */
+
+
+/* ── SECTION 2: CSS CUSTOM PROPERTIES ───────────────────────────────
+   Central token registry. Update here to retheme the whole project.
+   ------------------------------------------------------------------- */
+:root {
+  /* Primary brand colours (required palette) */
+  --primary:    #0d1b2a; /* Dark navy — page background foundation */
+  --accent:     #e6a817; /* Gold — CTAs, highlights, active states  */
+  --bg-light:   #f4f6f9; /* Light grey — used for print / light surfaces */
+  --text-main:  #212529; /* Dark body text — print and light contexts */
+  --success:    #28a745; /* Correct-answer and pass-state green */
+  --danger:     #dc3545; /* Wrong-answer, validation error, fail-state red */
+
+  /* Extended dark-theme palette */
+  --primary-mid:   #122541; /* Mid-tone navy — card/panel backgrounds */
+  --primary-soft:  #0e1e36; /* Soft navy — secondary panel tint */
+  --accent-light:  #f0c76a; /* Lighter gold — hover states, muted accents */
+  --border:        #234067; /* Subtle blue-grey border */
+  --text-light:    #e8ecf5; /* Light body text for dark backgrounds */
+  --text-muted:    #b7c2d8; /* De-emphasised text — captions, metadata */
+  --shadow:        0 10px 30px rgba(0, 0, 0, 0.35); /* Unified card elevation */
+
+  /* Backward-compat aliases — referenced by inline styles in HTML files */
+  --color-accent:        var(--accent);
+  --color-accent-strong: var(--accent-light);
+  --color-bg:            var(--primary);
+  --color-text:          var(--text-light);
+  --color-muted:         var(--text-muted);
+  --color-border:        var(--border);
+  --shadow-soft:         var(--shadow);
+}
+
+
+/* ── SECTION 3: BASE RESET AND DOCUMENT ─────────────────────────────
+   Minimal reset on top of Bootstrap. Establishes the dark page canvas
+   using the project radial-gradient background and Inter as base font.
+   ------------------------------------------------------------------- */
+
+/* Ensure page fills viewport height to avoid white flash at bottom */
+html,
+body {
+  min-height: 100%;
+}
+
+/* FIX 2: Background image only — dark gradient overlays removed so image
+   appears at full brightness. background-color is a fallback only. */
+body {
+  font-family: "Inter", sans-serif;
+  color: var(--text-light);
+  background-image: url('../assets/images/background.png');
+  background-size: cover;
+  background-position: center center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-color: var(--primary); /* fallback while image loads */
+  min-height: 100vh;
+  line-height: 1.65;
+}
+
+/* All heading levels: Inter Bold, white — clear against dark background */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.navbar-brand {
+  font-family: "Inter", sans-serif;
+  font-weight: 700;
+  color: #fff;
+}
+
+/* Inline code in prose: gold tint with dark pill background */
+code {
+  font-family: "Fira Code", monospace;
+  font-size: 0.875em;
+  color: var(--accent-light);
+  background: rgba(18, 37, 65, 0.75);
+  padding: 0.1em 0.42em;
+  border-radius: 0.25rem;
+}
+
+/* Standalone preformatted block: dark surface, subtle border, scrollable */
+pre {
+  font-family: "Fira Code", monospace;
+  font-size: 0.875rem;
+  background: #0b1520;
+  color: #abb2bf;
+  padding: 1.25rem 1.5rem;
+  border-radius: 0.6rem;
+  overflow-x: auto;
+  border: 1px solid var(--border);
+  line-height: 1.6;
+}
+
+/* code inside pre: reset inherited overrides so Prism can style freely */
+pre code {
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+  background: none;
+  padding: 0;
+  border-radius: 0;
+}
+
+
+/* ── SECTION 4: NAVBAR ───────────────────────────────────────────────
+   Sticky top bar with --primary background, glass-morphism blur, and
+   --accent underline on the currently active page link.
+   ------------------------------------------------------------------- */
+
+/* Sticky navigation bar: frosted-glass panel elevated above body::before overlay.
+   z-index matches Bootstrap's sticky-top value to avoid stacking conflicts. */
+.app-navbar {
+  position: relative;
+  z-index: 1020;
+  background: rgba(13, 27, 42, 0.85);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--border);
+}
+
+/* Brand text: always full white, slight tracking */
+.navbar-brand {
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: #fff !important;
+}
+
+/* Default link: muted colour to keep hierarchy clear */
+.nav-link {
+  color: var(--text-muted) !important;
+  font-weight: 600;
+  position: relative;
+  padding-bottom: 0.25rem;
+  transition: color 0.2s ease;
+}
+
+/* Hover / keyboard focus: brighten to gold */
+.nav-link:hover,
+.nav-link:focus {
+  color: var(--accent-light) !important;
+}
+
+/* Active page link: full accent gold */
+.nav-link.active {
+  color: var(--accent) !important;
+}
+
+/* Gold underline on active link — slides in on load/hover */
+.nav-link.active::after,
+.nav-link:hover::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--accent);
+  border-radius: 2px;
+  animation: underline-slide-in 0.22s ease forwards;
+}
+
+/* Slide underline in from left */
+@keyframes underline-slide-in {
+  from { transform: scaleX(0); transform-origin: left; }
+  to   { transform: scaleX(1); transform-origin: left; }
+}
+
+/* Hamburger button border visible in dark context */
+.navbar-toggler {
+  border-color: var(--border);
+}
+
+/* Gold focus ring on toggler for keyboard accessibility */
+.navbar-toggler:focus {
+  box-shadow: 0 0 0 0.2rem rgba(230, 168, 23, 0.4);
+}
+
+
+/* ── SECTION 5: BUTTONS ──────────────────────────────────────────────
+   Bootstrap's .btn-primary is overridden to use --accent. A subtle
+   translateY lift + box-shadow communicates interactivity on hover.
+   ------------------------------------------------------------------- */
+
+/* Override Bootstrap default blue with --accent gold */
+.btn-primary {
+  background-color: var(--accent);
+  border-color: var(--accent);
+  color: #1a1000;
+  font-weight: 700;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.15s ease,
+    box-shadow 0.2s ease;
+}
+
+/* Lift the button 2px and add a gold glow on hover */
+.btn-primary:hover,
+.btn-primary:focus {
+  background-color: var(--accent-light);
+  border-color: var(--accent-light);
+  color: #1a1000;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(230, 168, 23, 0.38);
+}
+
+/* Custom accent class used in templates — same treatment as btn-primary */
+.btn-accent {
+  background-color: var(--accent);
+  border: 1px solid var(--accent);
+  color: #1a1000;
+  font-weight: 700;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.15s ease,
+    box-shadow 0.2s ease;
+}
+
+/* Lift + glow on hover for .btn-accent */
+.btn-accent:hover,
+.btn-accent:focus {
+  background-color: var(--accent-light);
+  border-color: var(--accent-light);
+  color: #1a1000;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(230, 168, 23, 0.38);
+}
+
+/* Active (pressed) state: remove lift, deepen colour */
+.btn-primary:active,
+.btn-accent:active {
+  transform: translateY(0);
+  box-shadow: none;
+  background-color: var(--accent);
+  border-color: var(--accent);
+}
+
+
+/* ── SECTION 6: HERO SECTION AND SECTION LABELS ─────────────────────
+   The hero banner on each page uses a bottom border separator. The
+   .section-kicker label appears above page headings as a category tag.
+   ------------------------------------------------------------------- */
+
+/* Thin border visually closes the hero region */
+.hero-section {
+  border-bottom: 1px solid var(--border);
+}
+
+/* Small uppercase kicker label above major headings */
+.section-kicker {
+  display: block;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 0.78rem;
+  color: var(--accent-light);
+}
+
+
+/* ── SECTION 7: CARDS AND PANELS ─────────────────────────────────────
+   Glass-effect dark cards used throughout for structured content areas.
+   ------------------------------------------------------------------- */
+
+/* Primary content card: layered dark gradient with border and shadow */
+.info-card,
+.topic-card {
+  background: linear-gradient(
+    145deg,
+    rgba(18, 37, 65, 0.95),
+    rgba(10, 25, 45, 0.95)
+  );
+  border: 1px solid var(--border);
+  border-radius: 0.9rem;
+  box-shadow: var(--shadow);
+}
+
+/* Subtle tinted background for alternating section rows */
+.bg-panel {
+  background: rgba(12, 26, 47, 0.55);
+}
+
+
+/* ── SECTION 8: FORM ELEMENTS ────────────────────────────────────────
+   Inputs and textareas adopt the dark theme. Focus ring uses --accent.
+   ------------------------------------------------------------------- */
+
+/* Dark-themed input fields */
+.form-control,
+.form-control:focus {
+  background-color: #0b1b31;
+  color: var(--text-light);
+  border-color: var(--border);
+}
+
+/* Gold focus ring replaces Bootstrap's default blue */
+.form-control:focus {
+  box-shadow: 0 0 0 0.2rem rgba(230, 168, 23, 0.28);
+}
+
+
+/* ── SECTION 9: ACCORDION ────────────────────────────────────────────
+   Dark accordion overrides for Bootstrap's default light accordion,
+   used on the tutorial page (if applicable).
+   ------------------------------------------------------------------- */
+
+/* Accordion item and trigger button: dark navy background */
+.accordion-item,
+.accordion-button {
+  background-color: #0c1b33;
+  color: var(--text-light);
+  border-color: var(--border);
+}
+
+/* Expanded accordion header: slightly lighter with gold text */
+.accordion-button:not(.collapsed) {
+  background-color: #102544;
+  color: var(--accent-light);
+}
+
+/* Gold focus ring on accordion trigger */
+.accordion-button:focus {
+  box-shadow: 0 0 0 0.2rem rgba(230, 168, 23, 0.28);
+}
+
+
+/* ── SECTION 10: CODE BLOCKS (PRISM AUGMENTATION) ───────────────────
+   Prism.js provides token colours. These rules add project-consistent
+   border radius and border. Applies to Prism-decorated pre elements.
+   ------------------------------------------------------------------- */
+
+/* Add project border style to all Prism-decorated code blocks */
+pre[class*="language-"] {
+  border: 1px solid var(--border);
+  border-radius: 0.7rem;
+  font-family: "Fira Code", monospace;
+}
+
+/* Override Prism's default margin to suit card layouts */
+pre[class*="language-"]:last-child {
+  margin-bottom: 0;
+}
+
+
+/* ── SECTION 11: TUTORIAL PAGE ───────────────────────────────────────
+   .tutorial-block elements start invisible and slide into view when
+   the IntersectionObserver in tutorial.js adds .is-visible. The CSS
+   defines the initial state and the transition; JS adds the class.
+   ------------------------------------------------------------------- */
+
+/* Initial hidden state for scroll-reveal sections (JS adds is-visible) */
+.tutorial-block {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+
+/* Revealed state: JS adds this class when section enters the viewport */
+.tutorial-block.is-visible {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+}
+
+/* CSS playground preview area: dashed border makes it obvious */
+#css-playground-target {
+  min-height: 80px;
+  border: 1px dashed var(--border);
+  border-radius: 0.5rem;
+  padding: 1rem 1.25rem;
+  background: rgba(11, 27, 49, 0.8);
+  transition: border-color 0.2s ease;
+}
+
+/* Status line below playground textarea — colour toggled by JS */
+#css-playground-status {
+  font-size: 0.85rem;
+  min-height: 1.2em;
+  transition: color 0.2s ease;
+}
+
+
+/* ── SECTION 12: QUIZ PAGE ───────────────────────────────────────────
+   Question cards, answer option rows, validation states, results panel,
+   and attempt history table. JS toggles Bootstrap border/bg utilities
+   on these elements; CSS provides base styles and extra states.
+   ------------------------------------------------------------------- */
+
+/* FIX 2: Question cards — light theme so readable over background image */
+.question-card,
+.quiz-question {
+  background: #ffffff !important;
+  color: #0d1b2a !important;
+  border: 1px solid #dee2e6 !important;
+  border-left: 4px solid var(--accent) !important;
+  border-radius: 12px !important;
+  padding: 1rem 1.25rem;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08) !important;
+  transition: border-color 0.2s ease;
+}
+
+/* Answer option label row: light blue background for readability */
+.quiz-option {
+  cursor: pointer;
+  background: #f0f4ff !important;
+  color: #0d1b2a !important;
+  border: 1px solid #c8d6f0 !important;
+  border-radius: 8px !important;
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+/* Hover: slightly deeper blue tint with gold border */
+.quiz-option:hover {
+  background: #dce8ff !important;
+  border-color: var(--accent) !important;
+}
+
+/* Unanswered validation state — mirrors JS-added .border-danger */
+.unanswered,
+.quiz-question.border-danger {
+  border-left-color: var(--danger) !important;
+  border-color: var(--danger) !important;
+  animation: shake 0.32s ease;
+}
+
+/* Correct answer highlight — green tint on light background */
+.correct,
+.quiz-option.border-success {
+  background-color: rgba(40, 167, 69, 0.15) !important;
+  border-color: var(--success) !important;
+  color: #155724 !important;
+}
+
+/* Incorrect answer highlight — red tint on light background */
+.incorrect,
+.quiz-option.border-danger {
+  background-color: rgba(220, 53, 69, 0.12) !important;
+  border-color: var(--danger) !important;
+  color: #721c24 !important;
+}
+
+/* Results panel shown after grading: prominent dark card */
+.results-panel,
+#results-panel {
+  background: rgba(14, 30, 54, 0.94);
+  border: 1px solid var(--border);
+  border-radius: 0.75rem;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.32);
+}
+
+/* Score summary line: slightly larger for emphasis */
+#results-summary {
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+/* Attempt history table: inherits Bootstrap dark-striped; override colours */
+.history-table,
+#history-panel .table {
+  font-size: 0.9rem;
+  border-color: var(--border);
+}
+
+/* Table header: gold text to distinguish from body rows */
+.history-table thead th,
+#history-panel .table thead th {
+  color: var(--accent-light);
+  border-bottom-color: var(--border);
+  font-weight: 600;
+}
+
+
+/* ── SECTION 13: CV PAGE ─────────────────────────────────────────────
+   Visual components for the CV/biography page: hero banner, initials
+   avatar, typing animation cursor, two-column grid, animated skill
+   bars, quote box, role labels, and print output.
+   ------------------------------------------------------------------- */
+
+/* Hero banner: warm gold radial glow over dark navy gradient */
+.cv-hero {
+  background:
+    radial-gradient(circle at 5% 10%, rgba(230, 168, 23, 0.18), transparent 32%),
+    linear-gradient(155deg, rgba(18, 37, 65, 0.96), rgba(10, 24, 42, 0.96));
+}
+
+/* Circular avatar showing initials: gold gradient sphere */
+.avatar-circle {
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  font-size: 2.4rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: #0d1b30;
+  background: radial-gradient(circle at 30% 30%, #f7d892, var(--accent));
+  border: 3px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 12px 26px rgba(0, 0, 0, 0.32);
+}
+
+/* Blinking pipe cursor rendered via ::after on elements with this class */
+.typing-cursor::after {
+  content: "|";
+  margin-left: 4px;
+  opacity: 1;
+  animation: cursor-blink 0.9s steps(1, end) infinite;
+}
+
+/* Cursor blink keyframes: toggles opacity at the 50% mark */
+@keyframes cursor-blink {
+  50% { opacity: 0; }
+}
+
+/* CV body content: single column on mobile */
+.cv-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+/* Skill bar fill — starts at zero; JS sets final width via IntersectionObserver */
+.skill-value,
+.skill-bar-fill {
+  width: 0;
+  transition: width 1s ease; /* Smooth width expansion when JS triggers animation */
+  background-color: var(--accent) !important;
+}
+
+/* Skill bar track: dark inset trough */
+.skill-progress,
+.skill-item .progress {
+  background-color: #0b1b31;
+  border: 1px solid var(--border);
+  height: 0.95rem;
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+/* Gold left-border blockquote box for motivational quote */
+.quote-box {
+  border-left: 4px solid var(--accent);
+  background: rgba(9, 21, 39, 0.85);
+}
+
+/* Role / position label: gold accent to distinguish from body text */
+.role-meta {
+  color: var(--accent-light);
+  font-weight: 600;
+}
+
+
+/* ── SECTION 14: REFLECTION PAGE ─────────────────────────────────────
+   Vertical timeline layout for the AI reflection log entries. A
+   gradient line runs down the left edge with gold dot markers per item.
+   ------------------------------------------------------------------- */
+
+/* Container with left padding to allow the timeline line and dots */
+.reflection-timeline {
+  position: relative;
+  padding-left: 1.25rem;
+}
+
+/* Gradient vertical line — runs full height of the timeline container */
+.reflection-timeline::before {
+  content: "";
+  position: absolute;
+  left: 0.25rem;
+  top: 0.2rem;
+  bottom: 0.2rem;
+  width: 2px;
+  background: linear-gradient(180deg, var(--accent), var(--border));
+}
+
+/* Each individual reflection entry needs relative position for the dot */
+.timeline-item {
+  position: relative;
+}
+
+/* Gold dot marker at the start of each timeline entry */
+.timeline-item::before {
+  content: "";
+  position: absolute;
+  left: -1.1rem;
+  top: 0.55rem;
+  width: 0.7rem;
+  height: 0.7rem;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 3px rgba(230, 168, 23, 0.22);
+}
+
+
+/* ── SECTION 15: SHARED FOOTER ───────────────────────────────────────
+   Site-wide footer strip matching the navbar dark treatment.
+   ------------------------------------------------------------------- */
+
+/* Bottom strip: near-opaque navy elevated above body::before overlay */
+.app-footer {
+  position: relative;
+  z-index: 1;
+  background: rgba(8, 20, 39, 0.96);
+  border-top: 1px solid var(--border);
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+
+/* ── SECTION 16: ANIMATIONS ──────────────────────────────────────────
+   Named keyframe animations used throughout the project. The .fade-in
+   utility class triggers the fade + slide-up on any element. The shake
+   keyframe gives tactile feedback on quiz validation errors.
+   ------------------------------------------------------------------- */
+
+/* Fade in from slightly above: used for section headings and .fade-in */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Utility class: one-shot fade-in animation on any element */
+.fade-in {
+  animation: fade-in 0.5s ease both;
+}
+
+/* Apply fade-in automatically to the first heading in each main section */
+main > section > .container > article > header > h2,
+main > section > .container > h2 {
+  animation: fade-in 0.45s ease both;
+}
+
+/* Stagger successive section headings with increasing delays */
+main > section:nth-of-type(2) h2 { animation-delay: 0.10s; }
+main > section:nth-of-type(3) h2 { animation-delay: 0.20s; }
+main > section:nth-of-type(4) h2 { animation-delay: 0.30s; }
+
+/* Shake: lateral jiggle on invalid quiz question cards */
+@keyframes shake {
+  0%   { transform: translateX(0);    }
+  20%  { transform: translateX(-5px); }
+  40%  { transform: translateX( 5px); }
+  60%  { transform: translateX(-3px); }
+  80%  { transform: translateX( 3px); }
+  100% { transform: translateX(0);    }
+}
+
+
+/* ── SECTION 17: RESPONSIVE BREAKPOINTS ─────────────────────────────
+   Mobile-first approach: base styles target narrow screens; wider
+   layouts are progressively added via min-width queries.
+   Range covered: 320px (smallest smartphone) to 1400px (widescreen).
+   ------------------------------------------------------------------- */
+
+/* ≥ 992px (desktop): CV grid switches to two columns */
+@media (min-width: 992px) {
+  .cv-grid {
+    grid-template-columns: 1.05fr 0.95fr;
+    align-items: start;
+  }
+}
+
+/* ≤ 767px (small tablets and phones): reduce oversized display text */
+@media (max-width: 767.98px) {
+  /* Shrink Bootstrap display headings so they fit on narrow screens */
+  .display-5,
+  .display-6 {
+    font-size: 2rem;
+  }
+
+  /* Stack hero columns vertically and centre-align on small screens */
+  .hero-section .row {
+    text-align: center;
+  }
+
+  /* Full-width CTA buttons on mobile, capped to prevent over-stretch */
+  .hero-section .btn {
+    width: 100%;
+    max-width: 340px;
+  }
+
+  /* Reduce quiz card padding so questions fit without horizontal scroll */
+  .quiz-question,
+  .question-card {
+    padding: 0.75rem 0.9rem;
+  }
+
+  /* Narrower avatar on small screens to keep hero layout compact */
+  .avatar-circle {
+    width: 90px;
+    height: 90px;
+    font-size: 1.7rem;
+  }
+}
+
+/* ≤ 420px (small smartphones like iPhone SE): tighter code blocks */
+@media (max-width: 420px) {
+  /* Smaller monospace font prevents horizontal overflow inside cards */
+  pre,
+  pre[class*="language-"] {
+    font-size: 0.78rem;
+    padding: 0.85rem 1rem;
+  }
+
+  /* Ensure table cells wrap gracefully at very narrow widths */
+  #history-panel .table {
+    font-size: 0.78rem;
+  }
+}
+
+
+/* ── SECTION 18: PRINT STYLES ────────────────────────────────────────
+   Supports the CV "Download / Print" feature. Strips dark backgrounds,
+   hides navigation and the print button itself, and makes all text
+   print-legible on white paper. Mirrors the inline @media print block
+   in cv.html for full browser coverage.
+   ------------------------------------------------------------------- */
+@media print {
+  /* White page background for all printed output */
+  body {
+    background: #ffffff !important;
+    color: var(--text-main) !important;
+  }
+
+  /* Remove interactive chrome that has no meaning on paper */
+  .app-navbar,
+  .app-footer,
+  #download-cv-btn {
+    display: none !important;
+  }
+
+  /* Convert card dark backgrounds to white for legibility */
+  .info-card,
+  .cv-hero,
+  .quote-box,
+  .topic-card {
+    background: #ffffff !important;
+    color: var(--text-main) !important;
+    border: 1px solid #cccccc !important;
+    box-shadow: none !important;
+  }
+
+  /* Darken accent labels so they print visibly on white */
+  .section-kicker,
+  .role-meta,
+  h1, h2, h3, h4, h5, h6 {
+    color: #333333 !important;
+  }
+
+  /* Neutral avatar border on paper (no shadows) */
+  .avatar-circle {
+    border-color: #bbbbbb !important;
+    box-shadow: none !important;
+  }
+
+  /* Gold skill bars become a neutral grey for B&W printing */
+  .skill-value,
+  .skill-bar-fill {
+    background-color: #666666 !important;
+  }
+
+  /* Ensure skills bars remain sized correctly — animation is done */
+  .skill-progress,
+  .skill-item .progress {
+    background-color: #eeeeee !important;
+    border-color: #cccccc !important;
+  }
+
+  /* Avoid page breaks inside individual CV sections */
+  .info-card,
+  .cv-grid > div,
+  .timeline-item {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+}
+
+
+/* ── SECTION 19: TRANSPARENT PAGE WRAPPER + FLOATING CARDS ──────────
+   .page-content is the <main> container on every page. It is fully
+   transparent — the background image shows through gaps between cards.
+   Individual section cards (.info-card, .question-card, etc.) carry
+   their own white backgrounds, border-radius, and shadow.
+   ------------------------------------------------------------------- */
+
+/* Transparent wrapper: no background, no shadow, no border-radius.
+   Max-width and centering keep the content column readable. */
+.page-content {
+  position: relative;
+  z-index: 1;
+  background: transparent !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
+  max-width: 960px;
+  margin: 2rem auto;
+  color: #212529;
+  /* Vertical padding is supplied by Bootstrap's py-5 utility on <main>.
+     Horizontal gutters are handled by Bootstrap containers inside. */
+}
+
+/* Override the dark card style inherited by .info-card / .topic-card inside
+   the white page-content wrapper.  Colour tokens that were chosen for the
+   dark theme are replaced with light-theme equivalents. */
+.page-content .info-card,
+.page-content .topic-card {
+  background: rgba(255, 255, 255, 0.98) !important;
+  border: 1px solid #dee2e6 !important;
+  color: #212529 !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.09) !important;
+}
+
+/* Headings inside the white card must be dark so they are visible */
+.page-content h1,
+.page-content h2,
+.page-content h3,
+.page-content h4,
+.page-content h5,
+.page-content h6 {
+  color: #1a1a2e !important;
+}
+
+/* Body-level muted/light text tokens must flip to dark for white backgrounds */
+.page-content .text-light-subtle,
+.page-content .section-kicker {
+  color: #c07d00 !important; /* gold, legible on white */
+}
+
+/* Dark form controls inside cards need a light override */
+.page-content .form-control,
+.page-content .form-control:focus {
+  background-color: #f8f9fa !important;
+  color: #212529 !important;
+  border-color: #ced4da !important;
+}
+.page-content .form-control:focus {
+  box-shadow: 0 0 0 0.2rem rgba(230, 168, 23, 0.35) !important;
+}
+
+/* bg-panel inside the white card context — keep it a very light tint */
+.page-content .bg-panel {
+  background: rgba(0, 0, 0, 0.04) !important;
+}
+
+/* Slide-up + fade-in entrance animation for the page card on arrival */
+.page-content {
+  animation: slideUpFadeIn 0.5s ease forwards;
+}
+
+/* Entrance animation: card rises 28px from below while fading in */
+@keyframes slideUpFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ── SECTION 19b: PAGE TRANSITION OVERLAY ────────────────────────────
+   Fixed full-viewport dark curtain used as an exit/entrance transition
+   between pages. Managed by js/transitions.js: the overlay fades to
+   opaque on link click, causing a blinded exit, then the new page
+   arrives with the slideUpFadeIn entrance on .page-content.
+   ------------------------------------------------------------------- */
+
+/* Hidden by default; transitions.js adds .fade-in to show it */
+#page-transition-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(13, 27, 42, 0.85);
+  z-index: 9999;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.35s ease;
+}
+
+/* Active state: overlay becomes opaque — visually "swallows" the exit */
+#page-transition-overlay.fade-in {
+  opacity: 1;
+  pointer-events: all;
+}
+
+
+/* ── SECTION 20b: CV PAGE — TRANSPARENT OUTER WRAPPER ────────────────
+   The CV page uses individual section cards (each with their own white
+   background). The shared .page-content wrapper must be transparent so
+   the background image shows through the gaps between those cards.
+   body.cv-page is set by cv.html <body class="cv-page">.
+   ------------------------------------------------------------------- */
+
+/* FIX 3: Remove the white card wrapper on CV — show background in gaps */
+body.cv-page .page-content {
+  background: transparent !important;
+  box-shadow: none !important;
+  max-width: 960px;
+  margin: 2rem auto;
+}
+
+/* CV header/hero card: own white background so it remains readable */
+body.cv-page .cv-hero {
+  border-radius: 16px !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.18) !important;
+  overflow: hidden;
+}
+
+/* ── SECTION 20: MOBILE BACKGROUND ATTACHMENT FIX ────────────────────
+   iOS Safari has a long-standing rendering bug with background-attachment:
+   fixed inside scrollable documents. Switching all layers to 'scroll'
+   on narrow viewports prevents the white-flash and jitter artifacts.
+   background-attachment shorthand with one value applies to all layers.
+   ------------------------------------------------------------------- */
+
+@media (max-width: 768px) {
+  /* Override the fixed layer to scroll on mobile — iOS Safari fix */
+  body {
+    background-attachment: scroll;
+  }
+
+  /* Remove the rounded card corners on mobile: full-width fills the screen */
+  .page-content {
+    border-radius: 0;
+    margin: 0;
+    max-width: 100%;
+  }
+}
+
+
