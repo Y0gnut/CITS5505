@@ -948,4 +948,10 @@ body.cv-page .cv-hero {
   }
 }
 
+#reward-text {
+  font-style: italic;
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
 

@@ -19,7 +19,13 @@
       return;
     }
 
-    styleElement.textContent = cssText;
+    // Add !important to every declaration so playground CSS can override
+    // the theme's !important rules (e.g. .page-content h4 colour override).
+    const boostedCss = cssText.replace(
+      /([a-zA-Z-]+)\s*:\s*([^;!{}]+?)\s*;/g,
+      "$1: $2 !important;"
+    );
+    styleElement.textContent = boostedCss;
     statusElement.textContent = "Styles applied successfully.";
     statusElement.classList.remove("text-warning", "text-danger", "text-light-subtle");
     statusElement.classList.add("text-success");

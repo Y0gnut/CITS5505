@@ -7,7 +7,7 @@
 (function () {
   "use strict";
 
-  const PASS_THRESHOLD = 70;
+  const PASS_THRESHOLD = 50;
   const ATTEMPT_KEY = "quizAttempts";
 
   let questions = [];
@@ -93,14 +93,11 @@
 
     return data.every(function (item) {
       return (
-        typeof item.id === "number" &&
-        typeof item.topic === "string" &&
+        typeof item.category === "string" &&
         typeof item.question === "string" &&
         Array.isArray(item.options) &&
         item.options.length === 4 &&
-        typeof item.answer === "number" &&
-        item.answer >= 0 &&
-        item.answer <= 3
+        typeof item.answer === "string"
       );
     });
   }
@@ -126,7 +123,7 @@
 
       const topicBadge = document.createElement("span");
       topicBadge.className = "badge text-bg-warning";
-      topicBadge.textContent = question.topic;
+      topicBadge.textContent = question.category;
 
       headerRow.appendChild(numberText);
       headerRow.appendChild(topicBadge);
@@ -139,7 +136,7 @@
       optionsGroup.className = "vstack gap-2";
 
       question.options.forEach(function (optionText, optionIndex) {
-        const optionId = "q" + question.id + "_opt" + optionIndex;
+        const optionId = "q" + index + "_opt" + optionIndex;
         const label = document.createElement("label");
         label.className = "quiz-option p-2 rounded border border-secondary-subtle d-flex align-items-start gap-2";
         label.setAttribute("for", optionId);
@@ -149,7 +146,7 @@
         input.className = "form-check-input mt-1";
         input.name = "question-" + index;
         input.id = optionId;
-        input.value = String(optionIndex);
+        input.value = optionText;
         input.required = true;
 
         const text = document.createElement("span");
@@ -175,7 +172,7 @@
   function getUserAnswers() {
     return questions.map(function (_, index) {
       const selected = document.querySelector("input[name='question-" + index + "']:checked");
-      return selected ? Number(selected.value) : null;
+      return selected ? selected.value : null;
     });
   }
 
@@ -223,11 +220,11 @@
       labels.forEach(function (label, optionIndex) {
         label.classList.remove("border-success", "border-danger", "bg-success-subtle", "bg-danger-subtle");
 
-        if (optionIndex === question.answer) {
+        if (question.options[optionIndex] === question.answer) {
           label.classList.add("border-success", "bg-success-subtle");
         }
 
-        if (answers[index] === optionIndex && optionIndex !== question.answer) {
+        if (answers[index] === question.options[optionIndex] && question.options[optionIndex] !== question.answer) {
           label.classList.add("border-danger", "bg-danger-subtle");
         }
       });
@@ -387,10 +384,9 @@
       if (answers[index] === question.answer) {
         score += 1;
       }
+    });
     // Disable submit button to prevent re-grading after results are shown.
     $quizForm.find("[type='submit']").prop("disabled", true);
-
-    });
 
     const percentage = Math.round((score / questions.length) * 100);
     const passed = percentage >= PASS_THRESHOLD;
@@ -451,7 +447,7 @@
           return;
         }
 
-        questions = shuffleArray(data);
+        questions = shuffleArray(data).slice(0, 10);
         renderQuestions();
         $loadingState.addClass("d-none");
         $quizForm.removeClass("d-none");

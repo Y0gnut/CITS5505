@@ -69,14 +69,16 @@
         <div class="container py-4">
           <div class="row align-items-center g-4">
             <div class="col-lg-8">
-              <p class="section-kicker mb-2">Tutorial Page</p>
-              <h1 class="display-5 fw-bold mb-3">Practical Guide to HTML, CSS, and JavaScript</h1>
-              <p class="lead mb-4">
-                This tutorial explains not only what each technology does, but why professional developers follow specific
-                patterns. Understanding the rationale behind these practices helps you write code that scales, remains
-                accessible, and is easier to debug.
-              </p>
-              <a class="btn btn-accent btn-lg" href="#html-section">Start Learning</a>
+              <div class="info-card p-4">
+                <p class="section-kicker mb-2" style="color:#c07d00;">Tutorial Page</p>
+                <h1 class="display-5 fw-bold mb-3" style="color:#1a1a2e;">Practical Guide to HTML, CSS, and JavaScript</h1>
+                <p class="lead mb-4" style="color:#212529;">
+                  This tutorial explains not only what each technology does, but why professional developers follow specific
+                  patterns. Understanding the rationale behind these practices helps you write code that scales, remains
+                  accessible, and is easier to debug.
+                </p>
+                <a class="btn btn-accent btn-lg" href="#html-section">Start Learning</a>
+              </div>
             </div>
             <div class="col-lg-4">
               <aside class="info-card p-4" aria-label="Tutorial outcomes">
@@ -93,139 +95,198 @@
       </section>
 
       <section id="html-section" class="py-5">
-        <div class="container">
-          <article class="info-card p-4 p-md-5 tutorial-block">
-            <header class="mb-3">
-              <h2 class="mb-2">HTML: Semantic Structure and Why It Matters</h2>
-            </header>
-            <p>
-              Semantic HTML gives meaning to page regions. A screen reader can quickly jump to a <code>nav</code>,
-              understand where the <code>main</code> content begins, and identify complementary content in an
-              <code>aside</code>. Search engines also interpret this structure to understand your content hierarchy,
-              which improves discoverability.
-            </p>
-            <p>
-              Good document structure reduces technical debt: teammates can scan markup faster, CSS selectors stay more
-              predictable, and JavaScript hooks become explicit. The result is fewer fragile workarounds and more
-              maintainable code over time.
-            </p>
-            <h3 class="h5 mt-4">Annotated Example: Semantic Page Skeleton</h3>
-            <pre><code class="language-markup">&lt;!doctype html&gt;
+  <div class="container">
+    <article class="info-card p-4 p-md-5 tutorial-block">
+      <header class="mb-3">
+        <h2 class="mb-2">HTML: Building the Structure of a Web Page</h2>
+        <p>HTML is the skeleton of every web page. It defines <strong>what is on the page</strong> — not how it looks or behaves.</p>
+      </header>
+
+      <h3 class="h5 mt-4">What is HTML?</h3>
+      <p>
+        HTML stands for <strong>HyperText Markup Language</strong>. You use it to describe the content of a page
+        using <em>tags</em>. Each tag tells the browser what a piece of content is — a heading, a paragraph,
+        a link, an image, and so on.
+      </p>
+      <pre><code class="language-markup">&lt;!-- A basic HTML page --&gt;
+&lt;!doctype html&gt;
 &lt;html lang="en"&gt;
   &lt;head&gt;
-    &lt;meta charset="UTF-8" /&gt;
-    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0" /&gt;
-    &lt;title&gt;Student Portfolio&lt;/title&gt;
+    &lt;title&gt;My Page&lt;/title&gt;
   &lt;/head&gt;
   &lt;body&gt;
-    &lt;header&gt;
-      &lt;h1&gt;Alex Student&lt;/h1&gt;
-      &lt;nav aria-label="Primary"&gt;
-        &lt;ul&gt;
-          &lt;li&gt;&lt;a href="#projects"&gt;Projects&lt;/a&gt;&lt;/li&gt;
-          &lt;li&gt;&lt;a href="#contact"&gt;Contact&lt;/a&gt;&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/nav&gt;
-    &lt;/header&gt;
-
-    &lt;main id="content"&gt;
-      &lt;article aria-labelledby="post-title"&gt;
-        &lt;h2 id="post-title"&gt;Building an Accessible Quiz&lt;/h2&gt;
-        &lt;p&gt;Semantic landmarks help keyboard and screen-reader users navigate quickly.&lt;/p&gt;
-      &lt;/article&gt;
-
-      &lt;aside&gt;
-        &lt;h3&gt;Related Resources&lt;/h3&gt;
-        &lt;ul&gt;
-          &lt;li&gt;&lt;a href="https://developer.mozilla.org"&gt;MDN Docs&lt;/a&gt;&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/aside&gt;
-    &lt;/main&gt;
-
-    &lt;footer&gt;
-      &lt;p&gt;Copyright 2026 Alex Student&lt;/p&gt;
-    &lt;/footer&gt;
+    &lt;h1&gt;Hello, World!&lt;/h1&gt;
+    &lt;p&gt;This is my first web page.&lt;/p&gt;
   &lt;/body&gt;
 &lt;/html&gt;</code></pre>
-          </article>
-        </div>
-      </section>
+      <p>
+        The <code>&lt;head&gt;</code> section holds information <em>about</em> the page (like its title).
+        The <code>&lt;body&gt;</code> section holds everything the user actually sees.
+      </p>
+
+      <h3 class="h5 mt-4">Headings and Paragraphs</h3>
+      <p>
+        HTML has six levels of headings, from <code>&lt;h1&gt;</code> (most important) to <code>&lt;h6&gt;</code> (least important).
+        Use them in order — do not skip from <code>&lt;h1&gt;</code> to <code>&lt;h4&gt;</code> just for a bigger font size.
+        That breaks the page structure and hurts accessibility.
+      </p>
+      <pre><code class="language-markup">&lt;h1&gt;Page Title&lt;/h1&gt;
+&lt;h2&gt;Section Heading&lt;/h2&gt;
+&lt;h3&gt;Sub-section Heading&lt;/h3&gt;
+&lt;p&gt;A paragraph of text goes here.&lt;/p&gt;</code></pre>
+
+      <h3 class="h5 mt-4">Links and Images</h3>
+      <p>
+        Links use the <code>&lt;a&gt;</code> tag with an <code>href</code> attribute pointing to the destination.
+        Images use <code>&lt;img&gt;</code> with a <code>src</code> (file path) and <code>alt</code> (description) attribute.
+        The <code>alt</code> text is read aloud by screen readers and shown when the image cannot load — always include it.
+      </p>
+      <pre><code class="language-markup">&lt;!-- A clickable link --&gt;
+&lt;a href="https://example.com"&gt;Visit Example&lt;/a&gt;
+
+&lt;!-- An image with alt text --&gt;
+&lt;img src="photo.jpg" alt="A photo of the campus" /&gt;</code></pre>
+
+      <h3 class="h5 mt-4">Why Use Semantic Tags?</h3>
+      <p>
+        You could wrap everything in <code>&lt;div&gt;</code> tags and it would still display. But browsers,
+        search engines, and screen readers do not know what each <code>&lt;div&gt;</code> <em>means</em>.
+        Semantic tags like <code>&lt;header&gt;</code>, <code>&lt;nav&gt;</code>, <code>&lt;main&gt;</code>,
+        and <code>&lt;footer&gt;</code> give the page meaningful structure.
+      </p>
+      <pre><code class="language-markup">&lt;!-- Without semantics: hard to understand --&gt;
+&lt;div&gt;
+  &lt;div&gt;My Website&lt;/div&gt;
+  &lt;div&gt;Home | About | Contact&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- With semantics: clear and meaningful --&gt;
+&lt;header&gt;
+  &lt;h1&gt;My Website&lt;/h1&gt;
+  &lt;nav&gt;Home | About | Contact&lt;/nav&gt;
+&lt;/header&gt;</code></pre>
+      <p>
+        The semantic version tells the browser "this is the page header" and "this is a navigation menu."
+        This improves accessibility for users with screen readers and helps search engines understand your content.
+      </p>
+
+      <h3 class="h5 mt-4">Lists</h3>
+      <p>
+        Use <code>&lt;ul&gt;</code> for unordered (bullet) lists and <code>&lt;ol&gt;</code> for ordered (numbered) lists.
+        Each item goes inside a <code>&lt;li&gt;</code> tag.
+      </p>
+      <pre><code class="language-markup">&lt;!-- Unordered list --&gt;
+&lt;ul&gt;
+  &lt;li&gt;HTML&lt;/li&gt;
+  &lt;li&gt;CSS&lt;/li&gt;
+  &lt;li&gt;JavaScript&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;!-- Ordered list --&gt;
+&lt;ol&gt;
+  &lt;li&gt;Open the file&lt;/li&gt;
+  &lt;li&gt;Edit the content&lt;/li&gt;
+  &lt;li&gt;Save and refresh&lt;/li&gt;
+&lt;/ol&gt;</code></pre>
+
+      <div class="mt-4 p-3 rounded" style="background:rgba(230,168,23,0.1); border-left: 4px solid #e6a817;">
+        <strong>Key Takeaway:</strong> HTML defines <em>what</em> content is on the page.
+        It is not responsible for how things look (that is CSS) or how they behave (that is JavaScript).
+        Keep your HTML clean and semantic — everything else builds on top of it.
+      </div>
+
+    </article>
+  </div>
+</section>
 
       <section id="css-section" class="py-5 bg-panel">
-        <div class="container">
-          <article class="info-card p-4 p-md-5 tutorial-block">
-            <header class="mb-3">
-              <h2 class="mb-2">CSS: Selectors, Layout, and Responsive Thinking</h2>
-            </header>
-            <p>
-              CSS selectors are not only for styling; they encode intent. A selector like
-              <code>.card-list &gt; .card</code> communicates structure, while utility classes can communicate behavior.
-              Choose selectors that balance clarity and flexibility so your styles are easy to extend.
-            </p>
-            <p>
-              The box model defines spacing rules through <code>content</code>, <code>padding</code>,
-              <code>border</code>, and <code>margin</code>. Many layout bugs come from misunderstanding where spacing
-              belongs. Consistent rules reduce unpredictable overflow and visual misalignment.
-            </p>
-            <p>
-              Flexbox and Grid solve different problems: Flexbox aligns content along one axis; Grid manages two-dimensional
-              tracks. For responsive design, start mobile-first, use relative units, and add breakpoints only where layout
-              truly breaks. This leads to simpler CSS and better long-term maintainability.
-            </p>
-            <h3 class="h5 mt-4">Annotated Example: Responsive Card Grid</h3>
-            <pre><code class="language-css">/* Base reset that prevents width overflow from padding/border */
-* {
+  <div class="container">
+    <article class="info-card p-4 p-md-5 tutorial-block">
+      <header class="mb-3">
+        <h2 class="mb-2">CSS: Styling and Laying Out a Web Page</h2>
+        <p>CSS stands for <strong>Cascading Style Sheets</strong>. It controls how HTML elements <strong>look</strong> — colours, fonts, spacing, and layout.</p>
+      </header>
+
+      <h3 class="h5 mt-4">How CSS Works</h3>
+      <p>
+        A CSS rule has two parts: a <strong>selector</strong> that targets an HTML element,
+        and a <strong>declaration block</strong> that sets its style properties.
+      </p>
+      <pre><code class="language-css">/* Select all p tags and make the text blue */
+p {
+  color: blue;
+  font-size: 1rem;
+}</code></pre>
+
+      <h3 class="h5 mt-4">Selectors</h3>
+      <p>
+        Selectors tell CSS which elements to style. The three most common types are:
+      </p>
+      <pre><code class="language-css">/* Tag selector — targets every h1 */
+h1 {
+  color: navy;
+}
+
+/* Class selector — targets any element with class="highlight" */
+.highlight {
+  background-color: yellow;
+}
+
+/* ID selector — targets the one element with id="logo" */
+#logo {
+  width: 120px;
+}</code></pre>
+
+      <h3 class="h5 mt-4">The Box Model</h3>
+      <p>
+        Every HTML element is a rectangular box. The box model describes the space around content:
+        <strong>padding</strong> is inside the border, <strong>border</strong> is the edge,
+        and <strong>margin</strong> is outside the border. Use <code>box-sizing: border-box</code>
+        so padding and border are included in the element's total width — this prevents unexpected overflow.
+      </p>
+      <pre><code class="language-css">.card {
   box-sizing: border-box;
-}
-
-/* Semantic parent: each child card gets the same layout rules */
-.card-list {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1rem;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.card {
+  width: 300px;
   padding: 1rem;
-  border: 1px solid #2b4a75;
-  border-radius: 0.75rem;
-  background: linear-gradient(145deg, #11233d, #0a1a30);
+  border: 2px solid #333;
+  margin: 1rem;
+}</code></pre>
+
+      <h3 class="h5 mt-4">Responsive Design with Media Queries</h3>
+      <p>
+        A responsive page adapts its layout to different screen sizes. Media queries let you apply
+        different styles depending on the viewport width. Start with mobile styles first,
+        then add rules for larger screens.
+      </p>
+      <pre><code class="language-css">/* Default: single column on mobile */
+.container {
+  display: flex;
+  flex-direction: column;
 }
 
-/* At 768px+, switch to two columns */
-@media (min-width: 48rem) {
-  .card-list {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
-
-/* At 1200px+, use three columns and slightly larger spacing */
-@media (min-width: 75rem) {
-  .card-list {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 1.25rem;
+/* At 768px and wider: switch to two columns */
+@media (min-width: 768px) {
+  .container {
+    flex-direction: row;
   }
 }</code></pre>
 
-            <section class="mt-4" aria-labelledby="playground-title">
-              <h3 id="playground-title" class="h5">Interactive Demo: Live CSS Playground</h3>
-              <p>
-                Edit the CSS below to see styles applied to the sample card immediately. This mirrors how browsers apply
-                rules from the cascade in real time.
-              </p>
-              <div class="row g-3">
-                <div class="col-lg-6">
-                  <label for="css-playground-input" class="form-label">Type CSS Rules</label>
-                  <textarea
-                    id="css-playground-input"
-                    class="form-control"
-                    rows="12"
-                    spellcheck="false"
-                    aria-describedby="css-playground-help"
-                  >#css-playground-target {
+      <section class="mt-4" aria-labelledby="playground-title">
+        <h3 id="playground-title" class="h5">Interactive Demo: Live CSS Playground</h3>
+        <p>
+          Edit the CSS rules on the left and watch the card on the right update instantly.
+          Try changing <code>background</code>, <code>color</code>, <code>border-radius</code>, or <code>font-size</code>.
+        </p>
+        <div class="row g-3">
+          <div class="col-lg-6">
+            <label for="css-playground-input" class="form-label">Edit CSS Rules</label>
+            <textarea
+              id="css-playground-input"
+              class="form-control"
+              rows="12"
+              spellcheck="false"
+              aria-describedby="css-playground-help"
+            >#css-playground-target {
   border: 2px solid #d2a94f;
   border-radius: 14px;
   padding: 1rem;
@@ -242,91 +303,115 @@
   margin: 0;
   color: #e8ecf5;
 }</textarea>
-                  <p id="css-playground-help" class="small text-light-subtle mt-2 mb-0">
-                    Tip: try <code>transform</code>, <code>font-size</code>, or <code>background</code> changes.
-                  </p>
-                </div>
-                <div class="col-lg-6">
-                  <div class="info-card p-4 h-100">
-                    <h4 class="h6 mb-3">Preview</h4>
-                    <div id="css-playground-target">
-                      <h4>Live Demo Card</h4>
-                      <p>This element updates instantly as you edit CSS rules.</p>
-                    </div>
-                    <p id="css-playground-status" class="small mt-3 mb-0" aria-live="polite"></p>
-                  </div>
-                </div>
+            <p id="css-playground-help" class="small text-light-subtle mt-2 mb-0">
+              Tip: try changing <code>background</code>, <code>font-size</code>, or <code>border-radius</code>.
+            </p>
+          </div>
+          <div class="col-lg-6">
+            <div class="info-card p-4 h-100">
+              <h4 class="h6 mb-3">Preview</h4>
+              <div id="css-playground-target">
+                <h4>Live Demo Card</h4>
+                <p>This element updates instantly as you edit the CSS rules on the left.</p>
               </div>
-            </section>
-          </article>
+              <p id="css-playground-status" class="small mt-3 mb-0" aria-live="polite"></p>
+            </div>
+          </div>
         </div>
       </section>
 
+      <div class="mt-4 p-3 rounded" style="background:rgba(230,168,23,0.1); border-left: 4px solid #e6a817;">
+        <strong>Key Takeaway:</strong> CSS controls how your page <em>looks</em>.
+        Use selectors to target elements, the box model to control spacing,
+        and media queries to make your layout work on any screen size.
+      </div>
+
+    </article>
+  </div>
+</section>
+
       <section id="javascript-section" class="py-5">
-        <div class="container">
-          <article class="info-card p-4 p-md-5 tutorial-block">
-            <header class="mb-3">
-              <h2 class="mb-2">JavaScript: DOM, Events, and Async Design</h2>
-            </header>
-            <p>
-              DOM manipulation should be intentional and minimal. Querying elements repeatedly inside loops or re-rendering
-              large sections can cause performance issues. Cache references, update only what changed, and separate rendering
-              from business logic so behavior remains predictable.
-            </p>
-            <p>
-              Events are the backbone of browser interactivity. Delegation matters because it lets one listener handle many
-              dynamic elements, reducing memory usage and keeping code DRY. Good event architecture also prevents bugs caused
-              by duplicated listeners.
-            </p>
-            <p>
-              Asynchronous JavaScript with <code>fetch</code> and <code>async/await</code> keeps interfaces responsive while
-              waiting for network or storage operations. Proper error handling matters because silent failures make debugging
-              difficult and create confusing user experiences.
-            </p>
-            <h3 class="h5 mt-4">Annotated Example: Event Delegation + Async Data Fetch</h3>
-            <pre><code class="language-javascript">// Cache parent container once instead of attaching many listeners.
-const list = document.querySelector("#task-list");
-const status = document.querySelector("#status");
+  <div class="container">
+    <article class="info-card p-4 p-md-5 tutorial-block">
+      <header class="mb-3">
+        <h2 class="mb-2">JavaScript: Making Pages Interactive</h2>
+        <p>JavaScript is the programming language of the web. It controls how a page <strong>behaves</strong> — responding to clicks, updating content, and communicating with servers.</p>
+      </header>
 
-// One delegated event handler works for current and future buttons.
-list.addEventListener("click", (event) => {
-  if (!event.target.matches("button[data-remove]")) {
-    return;
-  }
+      <h3 class="h5 mt-4">Variables and Data Types</h3>
+      <p>
+        Variables store values. Use <code>const</code> for values that never change,
+        and <code>let</code> for values that might change later. Avoid <code>var</code> —
+        it has confusing scoping rules that can cause hard-to-find bugs.
+      </p>
+      <pre><code class="language-javascript">const siteName = "CITS5505"; // never reassigned
+let score = 0;               // will change as the quiz runs
 
-  const row = event.target.closest("li");
-  if (row) {
-    row.remove();
-  }
-});
+score = score + 1;           // update the score
+console.log(score);          // 1</code></pre>
 
-async function loadTasks() {
-  status.textContent = "Loading tasks...";
+      <h3 class="h5 mt-4">Functions</h3>
+      <p>
+        A function is a reusable block of code. Define it once, call it anywhere.
+        Functions help keep your code organised and avoid repetition.
+      </p>
+      <pre><code class="language-javascript">// Define a function
+function greet(name) {
+  return "Hello, " + name + "!";
+}
 
+// Call the function
+console.log(greet("Alex")); // Hello, Alex!</code></pre>
+
+      <h3 class="h5 mt-4">Selecting and Changing Elements</h3>
+      <p>
+        JavaScript can find HTML elements on the page using <code>document.querySelector()</code>
+        and then change their content, style, or attributes.
+      </p>
+      <pre><code class="language-javascript">// Find the element with id="message"
+const box = document.querySelector("#message");
+
+// Change its text content
+box.textContent = "You clicked the button!";</code></pre>
+
+      <h3 class="h5 mt-4">Responding to Events</h3>
+      <p>
+        Events fire when the user does something — clicks a button, types in a field,
+        or submits a form. Use <code>addEventListener</code> to run code when an event happens.
+      </p>
+      <pre><code class="language-javascript">const btn = document.querySelector("#myButton");
+
+btn.addEventListener("click", function () {
+  alert("Button was clicked!");
+});</code></pre>
+
+      <h3 class="h5 mt-4">Fetching Data with AJAX</h3>
+      <p>
+        AJAX lets JavaScript load data from a file or server in the background — without
+        reloading the page. The modern way to do this is with <code>fetch()</code> and
+        <code>async/await</code>. Always wrap it in <code>try/catch</code> to handle errors gracefully.
+      </p>
+      <pre><code class="language-javascript">async function loadData() {
   try {
-    const response = await fetch("/api/tasks");
-    if (!response.ok) {
-      throw new Error(`HTTP ${response.status}`);
-    }
-
-    const tasks = await response.json();
-    list.innerHTML = tasks
-      .map(
-        (task) =>
-          `&lt;li&gt;${task.title} &lt;button data-remove&gt;Remove&lt;/button&gt;&lt;/li&gt;`
-      )
-      .join("");
-
-    status.textContent = `Loaded ${tasks.length} tasks.`;
+    const response = await fetch("data/questions.json");
+    const data = await response.json();
+    console.log(data); // use the data
   } catch (error) {
-    status.textContent = `Unable to load tasks: ${error.message}`;
+    console.error("Failed to load:", error);
   }
 }
 
-loadTasks();</code></pre>
-          </article>
-        </div>
-      </section>
+loadData();</code></pre>
+
+      <div class="mt-4 p-3 rounded" style="background:rgba(230,168,23,0.1); border-left: 4px solid #e6a817;">
+        <strong>Key Takeaway:</strong> JavaScript controls how your page <em>behaves</em>.
+        Use it to respond to user actions, update the page without reloading,
+        and load data from external sources with AJAX.
+      </div>
+
+    </article>
+  </div>
+</section>
 
       <section class="py-5">
         <div class="container">

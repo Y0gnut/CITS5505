@@ -1,122 +1,222 @@
 [
   {
-    "id": 1,
-    "topic": "HTML",
-    "question": "Why is using semantic elements like <main>, <article>, and <nav> generally better than using only <div> tags?",
+    "question": "What does HTML stand for?",
     "options": [
-      "Semantic tags always load faster in every browser",
-      "Semantic tags improve meaning, accessibility, and maintainability",
-      "Semantic tags automatically apply Bootstrap styles",
-      "Semantic tags remove the need for CSS classes"
+      "Hyper Text Markup Language",
+      "Home Tool Markup Language",
+      "Hyperlinks and Text Markup Language",
+      "Hyper Tool Multi Language"
     ],
-    "answer": 1
+    "answer": "Hyper Text Markup Language",
+    "category": "HTML"
   },
   {
-    "id": 2,
-    "topic": "HTML",
-    "question": "Which statement about the alt attribute on <img> is most accurate?",
+    "question": "Which HTML tag is used to create a hyperlink?",
     "options": [
-      "It is only useful for search engines",
-      "It should repeat the file name of the image",
-      "It provides text alternatives when images cannot be seen",
-      "It is required only when width and height are missing"
+      "<link>",
+      "<a>",
+      "<href>",
+      "<nav>"
     ],
-    "answer": 2
+    "answer": "<a>",
+    "category": "HTML"
   },
   {
-    "id": 3,
-    "topic": "CSS",
-    "question": "Given .menu li a { color: gold; }, which part of the selector directly targets the clickable element?",
+    "question": "Which HTML tag is used to display an image?",
     "options": [
-      ".menu",
-      "li",
-      "a",
-      "color"
+      "<picture>",
+      "<image>",
+      "<img>",
+      "<src>"
     ],
-    "answer": 2
+    "answer": "<img>",
+    "category": "HTML"
   },
   {
-    "id": 4,
-    "topic": "CSS",
-    "question": "With box-sizing: border-box; applied, what does width: 300px represent?",
+    "question": "Which HTML tag represents the largest heading?",
     "options": [
-      "Only content width, excluding padding and border",
-      "Content plus padding and border combined",
-      "Content plus margin but not padding",
-      "Only border thickness"
+      "<heading>",
+      "<h6>",
+      "<head>",
+      "<h1>"
     ],
-    "answer": 1
+    "answer": "<h1>",
+    "category": "HTML"
   },
   {
-    "id": 5,
-    "topic": "CSS",
-    "question": "When should you prefer CSS Grid over Flexbox?",
+    "question": "How do you insert a comment in HTML?",
     "options": [
-      "When aligning items in a single row or column only",
-      "When you need two-dimensional layout control across rows and columns",
-      "When you want to avoid media queries entirely",
-      "When styling text color in navigation links"
+      "// this is a comment",
+      "<!-- this is a comment -->",
+      "/* this is a comment */",
+      "<comment>this is a comment</comment>"
     ],
-    "answer": 1
+    "answer": "<!-- this is a comment -->",
+    "category": "HTML"
   },
   {
-    "id": 6,
-    "topic": "JavaScript",
-    "question": "What is the main benefit of adding an event listener instead of inline onclick attributes in HTML?",
+    "question": "How do you create a line break in HTML?",
     "options": [
-      "It guarantees better performance in all cases",
-      "It separates structure from behavior and improves maintainability",
-      "It prevents users from opening developer tools",
-      "It automatically validates form fields"
+      "<break>",
+      "<br>",
+      "<lb>",
+      "<newline>"
     ],
-    "answer": 1
+    "answer": "<br>",
+    "category": "HTML"
   },
   {
-    "id": 7,
-    "topic": "JavaScript",
-    "question": "What does document.querySelector('#result') return if no matching element exists?",
+    "question": "Which tag is used to link an external CSS file in an HTML document?",
     "options": [
-      "An empty object",
-      "false",
-      "undefined",
-      "null"
+      "<style>",
+      "<script>",
+      "<link>",
+      "<css>"
     ],
-    "answer": 3
+    "answer": "<link>",
+    "category": "HTML"
   },
   {
-    "id": 8,
-    "topic": "JavaScript",
-    "question": "Why is async/await often preferred over deeply nested callbacks for asynchronous code?",
+    "question": "What does CSS stand for?",
     "options": [
-      "It makes code easier to read and handle errors with try/catch",
-      "It forces all asynchronous operations to run in parallel",
-      "It removes the need for network error handling",
-      "It converts asynchronous functions into synchronous ones"
+      "Computer Style Sheets",
+      "Creative Style Sheets",
+      "Cascading Style Sheets",
+      "Colorful Style Sheets"
     ],
-    "answer": 0
+    "answer": "Cascading Style Sheets",
+    "category": "CSS"
   },
   {
-    "id": 9,
-    "topic": "HTML",
-    "question": "Which heading structure is best practice for page semantics?",
+    "question": "Which CSS property is used to change the text colour?",
     "options": [
-      "Use many <h1> tags for visual emphasis only",
-      "Start at <h3> if the text looks better",
-      "Use headings in logical order to reflect content hierarchy",
-      "Avoid headings and use bold paragraphs instead"
+      "text-color",
+      "font-color",
+      "color",
+      "fgcolor"
     ],
-    "answer": 2
+    "answer": "color",
+    "category": "CSS"
   },
   {
-    "id": 10,
-    "topic": "CSS",
-    "question": "Why is a mobile-first approach considered a responsive best practice?",
+    "question": "In CSS, how do you select an element with class name 'box'?",
     "options": [
-      "Because desktop users do not need responsive design",
-      "Because starting with small screens encourages simpler, scalable layouts",
-      "Because media queries are not needed afterwards",
-      "Because pixel units become invalid on mobile devices"
+      "#box",
+      ".box",
+      "box",
+      "*box"
     ],
-    "answer": 1
+    "answer": ".box",
+    "category": "CSS"
+  },
+  {
+    "question": "In CSS, how do you select an element with id 'header'?",
+    "options": [
+      ".header",
+      "header",
+      "id=header",
+      "#header"
+    ],
+    "answer": "#header",
+    "category": "CSS"
+  },
+  {
+    "question": "Which CSS property controls the font size of text?",
+    "options": [
+      "text-size",
+      "text-style",
+      "font-size",
+      "font-weight"
+    ],
+    "answer": "font-size",
+    "category": "CSS"
+  },
+  {
+    "question": "How do you add a yellow background colour to all <h1> tags?",
+    "options": [
+      "h1 {background-color: yellow;}",
+      "h1.all {background-color: yellow;}",
+      "h1 {color: yellow;}",
+      "h1 {bg-color: yellow;}"
+    ],
+    "answer": "h1 {background-color: yellow;}",
+    "category": "CSS"
+  },
+  {
+    "question": "How do you add a comment in a CSS file?",
+    "options": [
+      "// this is a comment",
+      "<!-- this is a comment -->",
+      "/* this is a comment */",
+      "' this is a comment"
+    ],
+    "answer": "/* this is a comment */",
+    "category": "CSS"
+  },
+  {
+    "question": "Which HTML tag is used to place JavaScript code?",
+    "options": [
+      "<javascript>",
+      "<js>",
+      "<script>",
+      "<code>"
+    ],
+    "answer": "<script>",
+    "category": "JavaScript"
+  },
+  {
+    "question": "How do you create an alert box in JavaScript saying 'Hello World'?",
+    "options": [
+      "msg(\"Hello World\");",
+      "alert(\"Hello World\");",
+      "alertBox(\"Hello World\");",
+      "prompt(\"Hello World\");"
+    ],
+    "answer": "alert(\"Hello World\");",
+    "category": "JavaScript"
+  },
+  {
+    "question": "How do you create a function named myFunction in JavaScript?",
+    "options": [
+      "create myFunction()",
+      "function:myFunction()",
+      "function myFunction()",
+      "def myFunction()"
+    ],
+    "answer": "function myFunction()",
+    "category": "JavaScript"
+  },
+  {
+    "question": "Which keyword is used to declare a variable in JavaScript?",
+    "options": [
+      "int",
+      "variable",
+      "let",
+      "string"
+    ],
+    "answer": "let",
+    "category": "JavaScript"
+  },
+  {
+    "question": "Which symbol is the assignment operator in JavaScript?",
+    "options": [
+      "==",
+      "===",
+      "=",
+      "=>"
+    ],
+    "answer": "=",
+    "category": "JavaScript"
+  },
+  {
+    "question": "How do you get an HTML element with id 'demo' in JavaScript?",
+    "options": [
+      "document.getElementByName(\"demo\")",
+      "document.getElementById(\"demo\")",
+      "document.querySelector(\".demo\")",
+      "document.getId(\"demo\")"
+    ],
+    "answer": "document.getElementById(\"demo\")",
+    "category": "JavaScript"
   }
 ]

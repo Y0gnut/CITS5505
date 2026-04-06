@@ -103,125 +103,119 @@
 
     <!-- Main reflection content -->
     <main class="py-5 page-content">
-      <section class="container">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-9">
+
+        <header class="mb-4 info-card p-4" style="background:rgba(255,255,255,0.97)!important; border-radius:0.9rem; color:#1a1a2e!important;">
+          <p class="section-kicker mb-2" style="color:#c07d00!important;">Reflection Log</p>
+          <h1 class="mb-2" style="color:#1a1a2e!important;">AI Reflection Log</h1>
+          <p class="mb-0" style="color:#555!important;">
+            A critical evaluation of how AI tools and large language models were used during this project,
+            including example prompts, outputs, corrections made, and limitations observed.
+          </p>
+        </header>
+
+        <!-- Case 1 -->
         <article class="info-card p-4 p-md-5 mb-4">
-          <p class="section-kicker mb-2">AI Reflection Log Page</p>
-          <h1 class="mb-3">Reflective Report: AI-Assisted Development Process</h1>
+          <h2 class="h4 mb-3">Case 1: AI CSS Debugging — Treating Symptoms, Not the Cause</h2>
+
+          <h3 class="h6 text-uppercase mb-1" style="color:#c07d00;">Prompt Used</h3>
+          <blockquote class="p-3 mb-3 rounded" style="background:rgba(255,255,255,0.05); border-left: 4px solid #c07d00;">
+            "The text in the hero section is not visible against the background image. Fix the text colour."
+          </blockquote>
+
+          <h3 class="h6 text-uppercase mb-1" style="color:#c07d00;">What AI Produced</h3>
+          <p>
+            AI gave multiple sequential fixes — first adding the <code>.info-card</code> class, then adding inline styles,
+            then adding <code>!important</code> to force override. Each solution failed.
+          </p>
+
+          <h3 class="h6 text-uppercase mb-1" style="color:#c07d00;">What I Changed</h3>
+          <p>
+            After repeated failed attempts, I manually inspected the HTML structure and discovered the hero section
+            was not inside the <code>.page-content</code> container, so the CSS selectors were never targeting the
+            right element. The AI's fixes were applied to the wrong scope entirely.
+          </p>
+
+          <h3 class="h6 text-uppercase mb-1" style="color:#c07d00;">Critical Evaluation</h3>
           <p class="mb-0">
-            During this project I used GitHub Copilot Chat and ChatGPT as development assistants, not as automatic code
-            replacement tools. I mainly used them for three tasks: drafting first-pass JavaScript logic, diagnosing edge-case
-            bugs, and reviewing alternative implementation strategies. For example, I asked for suggestions on AJAX data loading,
-            dynamic rendering, and event handling patterns. I then compared outputs with assignment requirements, browser behavior,
-            and MDN documentation before integrating anything. This workflow helped me move faster, but still required technical
-            judgment to verify correctness, improve code quality, and keep the final implementation aligned with academic and
-            engineering standards.
+            AI debugging tends to be symptomatic rather than diagnostic. It cannot see the browser's rendered output
+            or computed styles, so it guesses based on common patterns. This session demonstrated that AI has no
+            awareness of the actual DOM structure at runtime. A human developer needs to provide precise context —
+            or better yet, use browser DevTools — rather than relying on AI to identify root causes independently.
           </p>
         </article>
 
-        <section class="reflection-timeline" aria-label="AI use case timeline">
-          <article class="info-card p-4 p-md-5 mb-4 timeline-item">
-            <header class="mb-3">
-              <h2 class="h3 mb-2">Use Case 1: Code Generation (Quiz AJAX Logic)</h2>
-            </header>
+        <!-- Case 2 -->
+        <article class="info-card p-4 p-md-5 mb-4">
+          <h2 class="h4 mb-3">Case 2: AI Fulfilled the Brief But Missed the Intent</h2>
 
-            <h3 class="h5">Example Prompt Sent to AI</h3>
-            <pre><code class="language-text">Create jQuery quiz logic that loads questions from data/questions.json using $.ajax(),
-shuffles with Fisher-Yates, renders each question with 4 radio options, validates all answers on submit,
-and shows score + pass/fail without page reload.</code></pre>
+          <h3 class="h6 text-uppercase mb-1" style="color:#c07d00;">Prompt Used</h3>
+          <blockquote class="p-3 mb-3 rounded" style="background:rgba(255,255,255,0.05); border-left: 4px solid #c07d00;">
+            "Create a quiz page with at least 10 questions loaded from a JSON file."
+          </blockquote>
 
-            <h3 class="h5 mt-4">What the AI Produced</h3>
-            <p>
-              The AI returned a workable structure with an AJAX request, a shuffle function, and score calculation logic. It also
-              proposed rendering question blocks in a loop and collecting answers on submit. This was a useful starting point because
-              it outlined the main control flow quickly and reduced blank-page time.
-            </p>
+          <h3 class="h6 text-uppercase mb-1" style="color:#c07d00;">What AI Produced</h3>
+          <p>
+            AI created exactly 10 questions in the JSON file. Technically, this satisfied the brief. However,
+            the actual intent was to have a larger question pool (20 questions) that randomly selects 10 each
+            session, so that repeat attempts feel different and the quiz has more variety.
+          </p>
 
-            <h3 class="h5 mt-4">What I Changed and Why</h3>
-            <p>
-              I replaced string-concatenated HTML rendering with explicit <code>createElement</code>/<code>appendChild</code>
-              construction to satisfy assignment requirements and reduce markup mistakes. I also added stricter JSON shape validation
-              because the original suggestion assumed all records were valid. Finally, I wrapped localStorage history operations in
-              <code>try/catch</code> for resilience in restricted browsing modes. These changes were made to improve robustness,
-              compliance, and maintainability rather than just making the code "work" once.
-            </p>
-          </article>
+          <h3 class="h6 text-uppercase mb-1" style="color:#c07d00;">What I Changed</h3>
+          <p>
+            I explicitly rewrote the prompt to specify 20 questions in the JSON file and instructed the JS
+            to randomly select 10 per session using <code>.slice(0, 10)</code> after shuffling.
+          </p>
 
-          <article class="info-card p-4 p-md-5 mb-4 timeline-item">
-            <header class="mb-3">
-              <h2 class="h3 mb-2">Use Case 2: Debugging (beforeunload Not Clearing)</h2>
-            </header>
+          <h3 class="h6 text-uppercase mb-1" style="color:#c07d00;">Critical Evaluation</h3>
+          <p class="mb-0">
+            This highlights a fundamental limitation of AI: it processes the literal meaning of language, not
+            the underlying intent. The brief said "at least 10 questions" and AI delivered exactly 10 — correct,
+            but uninspired. This mirrors a broader limitation: AI struggles to infer what a person <em>actually</em>
+            wants beyond what they <em>literally</em> said. Interestingly, this is something humans also struggle
+            with when communicating with each other — but the gap feels more pronounced with AI because it has
+            no shared lived experience to draw from, only statistical patterns in text.
+          </p>
+        </article>
 
-            <h3 class="h5">Example Prompt Sent to AI</h3>
-            <pre><code class="language-text">My quiz attaches beforeunload after first answer, but warning still appears after successful submit.
-Show how to remove the listener correctly and avoid duplicate attachments.</code></pre>
+        <!-- Case 3 -->
+        <article class="info-card p-4 p-md-5 mb-4">
+          <h2 class="h4 mb-3">Case 3: AI Image Generation and the Risk of Unintentional Plagiarism</h2>
 
-            <h3 class="h5 mt-4">What the AI Suggested</h3>
-            <p>
-              The AI suggested storing the event handler as a named function, tracking whether the listener had already been added,
-              and explicitly calling <code>removeEventListener</code> after successful submission. It also suggested separating
-              attachment and detachment into dedicated helper functions.
-            </p>
+          <h3 class="h6 text-uppercase mb-1" style="color:#c07d00;">Prompt Used</h3>
+          <blockquote class="p-3 mb-3 rounded" style="background:rgba(255,255,255,0.05); border-left: 4px solid #c07d00;">
+            "Generate a background image in the style of this image [reference image found online]."
+          </blockquote>
 
-            <h3 class="h5 mt-4">What I Changed</h3>
-            <p>
-              I implemented <code>attachBeforeUnload()</code> and <code>detachBeforeUnload()</code> with a boolean flag
-              (<code>beforeUnloadAttached</code>) so the listener is never registered twice. On valid submission I call detach before
-              showing results and saving attempt history. I then re-tested by answering one question, submitting successfully, and
-              refreshing/navigating away to confirm no warning appears.
-            </p>
-          </article>
+          <h3 class="h6 text-uppercase mb-1" style="color:#c07d00;">What AI Produced</h3>
+          <p>
+            The AI (Nano Banana) returned an image that was effectively a colour palette swap of the reference
+            image rather than a genuinely original design inspired by the style.
+          </p>
 
-          <article class="info-card p-4 p-md-5 mb-4 timeline-item">
-            <header class="mb-3">
-              <h2 class="h3 mb-2">Critical Evaluation</h2>
-            </header>
+          <h3 class="h6 text-uppercase mb-1" style="color:#c07d00;">What I Changed</h3>
+          <p>
+            I used the output cautiously and modified it further, rather than using it directly.
+          </p>
 
-            <h3 class="h5">Subtle AI Error I Found</h3>
-            <p>
-              In one iteration, the AI suggested using <code>event.returnValue = true</code> as the key mechanism for the
-              <code>beforeunload</code> warning and implied custom text would be shown. This is subtly wrong for modern browsers:
-              custom strings are ignored, and the reliable pattern is calling <code>event.preventDefault()</code> plus setting
-              <code>event.returnValue</code> to an empty string for compatibility.
-            </p>
+          <h3 class="h6 text-uppercase mb-1" style="color:#c07d00;">Critical Evaluation</h3>
+          <p class="mb-0">
+            This raises a real ethical concern: AI image generators are probabilistic systems trained on existing
+            images. When a prompt explicitly references a specific image, the output can closely resemble the
+            original work, potentially infringing on the original creator's copyright — even if unintentionally.
+            The ambiguity of the prompt ("in the style of") made this worse, as the AI interpreted it as "copy
+            this as closely as possible." This suggests that vague prompts carry genuine legal and ethical risk
+            when used with generative AI tools. Users have a responsibility to review AI-generated assets
+            critically and not assume that "AI-generated" automatically means "original" or "safe to use."
+          </p>
+        </article>
 
-            <h3 class="h5 mt-4">How I Detected the Error</h3>
-            <p>
-              I tested in Chrome and noticed the suggested custom message never appeared. I then checked MDN documentation for
-              <code>beforeunload</code>, which confirms browser limitations and recommended usage. The mismatch between AI output and
-              real browser behavior exposed that the suggestion mixed older patterns with modern behavior assumptions.
-            </p>
-
-            <h3 class="h5 mt-4">Broader Limitations and Risks</h3>
-            <p>
-              This experience highlighted common AI limitations: hallucination risk (invented certainty), outdated API knowledge,
-              and over-confident tone even when details are version-sensitive. AI can accelerate ideation and boilerplate generation,
-              but it cannot be treated as an authority source. Every non-trivial suggestion must be tested and cross-checked against
-              trusted references.
-            </p>
-
-            <h3 class="h5 mt-4">Ethical Reflection</h3>
-            <p class="mb-0">
-              I treated AI output as a draft assistant and kept responsibility for design, verification, and final decisions. This
-              supports academic integrity because understanding and accountability remain with me. Over-reliance would risk submitting
-              code I cannot explain, which is both an ethical and practical problem in software engineering.
-            </p>
-          </article>
-
-          <article class="info-card p-4 p-md-5 timeline-item">
-            <header class="mb-3">
-              <h2 class="h3 mb-2">Conclusion</h2>
-            </header>
-            <p class="mb-0">
-              I learned that AI is most valuable as a rapid collaborator for drafting, idea comparison, and debugging hypotheses,
-              not as a substitute for engineering judgment. The biggest gains came from iterative prompting plus strict verification
-              through browser testing and documentation checks. I also became more careful about edge cases, especially event lifecycles
-              and API response validation. Going forward, I will keep using AI to accelerate routine work, while preserving manual review,
-              testing discipline, and ownership of final technical decisions.
-            </p>
-          </article>
-        </section>
-      </section>
-    </main>
+      </div>
+    </div>
+  </div>
+</main>
 
     <!-- Shared site footer -->
     <footer class="app-footer py-4 mt-5">
