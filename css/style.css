@@ -954,4 +954,16 @@ body.cv-page .cv-hero {
   font-size: 1.5rem;
 }
 
+.quiz-threshold-notice {
+  display: inline-block;
+  background: #f0f4ff;
+  border: 1px solid #c8d6f0;
+  border-left: 4px solid #e6a817;
+  border-radius: 6px;
+  padding: 0.5rem 1rem;
+  color: #0d1b2a;
+  font-size: 0.95rem;
+  margin-top: 0.75rem;
+}
+
 

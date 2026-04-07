@@ -460,6 +460,9 @@
   $(function () {
     $(".current-year").text(new Date().getFullYear());
 
+    $("#threshold-pct").text(String(PASS_THRESHOLD));
+    $("#threshold-count").text(String(Math.ceil(PASS_THRESHOLD / 100 * 10)));
+
     loadQuestions();
     renderAttemptHistory();
 
