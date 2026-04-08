@@ -189,6 +189,47 @@
   &lt;li&gt;Save and refresh&lt;/li&gt;
 &lt;/ol&gt;</code></pre>
 
+      <section class="mt-4" aria-labelledby="html-playground-title">
+        <h3 id="html-playground-title" class="h5">Interactive Demo: Live HTML Preview</h3>
+        <p>
+          Type HTML into the editor and watch the browser render it instantly in the preview panel.
+          Try tags like <code>&lt;h2&gt;</code>, <code>&lt;strong&gt;</code>, <code>&lt;em&gt;</code>, or <code>&lt;a href="#"&gt;</code>.
+        </p>
+        <div class="row g-3">
+          <div class="col-lg-6">
+            <label for="html-playground-input" class="form-label">Edit HTML</label>
+            <textarea
+              id="html-playground-input"
+              class="form-control"
+              rows="10"
+              spellcheck="false"
+              aria-describedby="html-playground-help"
+            ><h2>Hello, World!</h2>
+<p>This is a <strong>paragraph</strong> with <em>emphasis</em>.</p>
+<ul>
+  <li>HTML</li>
+  <li>CSS</li>
+  <li>JavaScript</li>
+</ul>
+<a href="#">A link element</a></textarea>
+            <p id="html-playground-help" class="small text-light-subtle mt-2 mb-0">
+              Tip: try <code>&lt;blockquote&gt;</code>, <code>&lt;hr /&gt;</code>, or nested lists.
+            </p>
+          </div>
+          <div class="col-lg-6">
+            <div class="info-card p-4 h-100">
+              <h4 class="h6 mb-3">Preview</h4>
+              <iframe
+                id="html-playground-preview"
+                class="html-playground-frame"
+                sandbox=""
+                title="Live HTML preview"
+              ></iframe>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <div class="mt-4 p-3 rounded" style="background:rgba(230,168,23,0.1); border-left: 4px solid #e6a817;">
         <strong>Key Takeaway:</strong> HTML defines <em>what</em> content is on the page.
         It is not responsible for how things look (that is CSS) or how they behave (that is JavaScript).

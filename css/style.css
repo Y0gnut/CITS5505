@@ -394,6 +394,16 @@ pre[class*="language-"]:last-child {
   transition: color 0.2s ease;
 }
 
+/* HTML playground sandboxed preview iframe */
+.html-playground-frame {
+  width: 100%;
+  height: 220px;
+  border: 1px solid var(--border);
+  border-radius: 0.5rem;
+  background: #fff;
+  display: block;
+}
+
 
 /* ── SECTION 12: QUIZ PAGE ───────────────────────────────────────────
    Question cards, answer option rows, validation states, results panel,

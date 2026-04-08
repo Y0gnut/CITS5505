@@ -149,6 +149,29 @@
       });
     }
 
+    // HTML live preview playground — sandboxed iframe prevents script execution
+    var $htmlInput = $("#html-playground-input");
+    var htmlFrame = document.getElementById("html-playground-preview");
+
+    if ($htmlInput.length > 0 && htmlFrame) {
+      function updateHtmlPreview(markup) {
+        htmlFrame.srcdoc =
+          "<!doctype html><html><head><style>" +
+          "body{font-family:system-ui,sans-serif;padding:0.75rem;font-size:0.9rem;" +
+          "color:#1a1a2e;line-height:1.6;margin:0;}a{color:#1a6fc4;}" +
+          "h1,h2,h3,h4,h5,h6{margin:0.5rem 0;}p{margin:0.4rem 0;}" +
+          "</style></head><body>" +
+          markup +
+          "</body></html>";
+      }
+
+      updateHtmlPreview($htmlInput.val());
+
+      $htmlInput.on("input", function () {
+        updateHtmlPreview($(this).val());
+      });
+    }
+
     setupScrollReveal();
 
     // Apply reveal state styles after observer setup.
