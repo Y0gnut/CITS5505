@@ -61,7 +61,7 @@ body {
 body {
   font-family: "Inter", sans-serif;
   color: var(--text-light);
-  background-image: url('../assets/images/background.png');
+  background-image: url('../assets/images/background.jpg');
   background-size: cover;
   background-position: center center;
   background-attachment: fixed;
